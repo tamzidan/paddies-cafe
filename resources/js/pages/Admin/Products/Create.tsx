@@ -12,6 +12,7 @@ export default function ProductCreate({ categories }: { categories: Category[] }
         product_category_id: '',
         description: '',
         price: 0,
+        is_featured: false as boolean,
         image: null as File | null,
         delivery_link_1: '',
         delivery_link_2: '',
@@ -70,6 +71,22 @@ export default function ProductCreate({ categories }: { categories: Category[] }
                             <input type="file" onChange={e => setData('image', e.target.files ? e.target.files[0] : null)} className="w-full bg-input border-border rounded-md p-2" />
                             {errors.image && <div className="text-red-500">{errors.image}</div>}
                         </div>
+
+                        {/* --- TAMBAHKAN CHECKBOX DI SINI --- */}
+                        <div className="flex items-center gap-2">
+                            <input
+                                type="checkbox"
+                                id="is_featured"
+                                checked={data.is_featured}
+                                onChange={e => setData('is_featured', e.target.checked)}
+                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            />
+                            <label htmlFor="is_featured" className="text-sm font-medium">
+                                Jadikan Produk Unggulan
+                            </label>
+                        </div>
+                        {/* --------------------------------- */}
+
                         {/* Link Delivery */}
                         <div>
                             <label className="block text-sm font-medium mb-1">Link Grab</label>

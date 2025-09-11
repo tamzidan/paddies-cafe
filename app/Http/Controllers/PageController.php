@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 // Tambahkan import model di atas
 use App\Models\Slider; // <--- Impor model Slider kita
+use App\Models\Testimonial; // <-- Tambahkan ini di atas
 use Illuminate\Http\Request;
 use Inertia\Inertia; // <--- Impor Inertia
 
@@ -33,18 +34,15 @@ class PageController extends Controller
         $sliders = Slider::orderBy('order')->get();
         $products = Product::with('category')->latest()->get();
         $categories = ProductCategory::all();
-        
-        // --- 2. TAMBAHKAN LOGIKA INI ---
-        // Cari menu yang statusnya 'is_active' = true
         $activeMenu = MenuPdf::where('is_active', true)->first();
-        // ---------------------------------
+        $testimonials = Testimonial::where('is_active', true)->latest()->get(); // <-- TAMBAHKAN INI
 
         return Inertia::render('CafeWebsite', [
             'sliders' => $sliders,
             'products' => $products,
             'categories' => $categories,
-            // --- 3. KIRIM URL SEBAGAI PROP BARU ---
-            'menuPdfUrl' => $activeMenu ? $activeMenu->url : null
+            'menuPdfUrl' => $activeMenu ? $activeMenu->url : null,
+            'testimonials' => $testimonials
         ]);
     }
 

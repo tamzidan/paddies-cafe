@@ -33,7 +33,11 @@ const mainNavItems: NavItem[] = [
         href: '/admin/menu-pdfs',
         icon: LayoutGrid,
     },
-
+    {
+        title: 'Manajemen Testimonials',
+        href: '/admin/testimonials',
+        icon: LayoutGrid,
+    },
 ];
 
 const footerNavItems: NavItem[] = [

@@ -21,6 +21,7 @@ export default function ProductEdit({ product, categories }: Props) {
         product_category_id: product.product_category_id || '',
         description: product.description || '',
         price: product.price || '',
+        is_featured: product.is_featured || false, // <-- TAMBAHKAN STATE BARU
         image: null as File | null,
         delivery_link_1: product.delivery_link_1 || '',
         delivery_link_2: product.delivery_link_2 || '',
@@ -115,6 +116,21 @@ export default function ProductEdit({ product, categories }: Props) {
                             />
                             {errors.image && <div className="text-red-500 text-sm">{errors.image}</div>}
                         </div>
+
+                        {/* --- TAMBAHKAN CHECKBOX DI SINI --- */}
+                        <div className="flex items-center gap-2">
+                            <input
+                                type="checkbox"
+                                id="is_featured"
+                                checked={data.is_featured}
+                                onChange={e => setData('is_featured', e.target.checked)}
+                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            />
+                            <label htmlFor="is_featured" className="text-sm font-medium">
+                                Jadikan Produk Unggulan
+                            </label>
+                        </div>
+                        {/* --------------------------------- */}
 
                         {/* Link Delivery */}
                         <div>

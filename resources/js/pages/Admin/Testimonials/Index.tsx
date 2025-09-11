@@ -1,130 +1,110 @@
-// resources/js/Pages/Admin/Products/Index.tsx
+// resources/js/Pages/Admin/Testimonials/Index.tsx
 import AppLayout from '@/layouts/app-layout';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, usePage, router } from '@inertiajs/react';
-import { PencilSquareIcon, TrashIcon, PlusIcon, ExclamationTriangleIcon, XMarkIcon, StarIcon } from '@heroicons/react/24/solid';
+import { PencilSquareIcon, TrashIcon, PlusIcon, ExclamationTriangleIcon, XMarkIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
-// import { StarIcon } from '@heroicons/react/24/solid'; 
 
-// Definisikan tipe datanya
-interface Product { 
+interface Testimonial { 
     id: number; 
     name: string; 
-    price: number; 
-    image_path: string; 
-    category: { name: string };
-    is_featured: boolean; // <-- Tambahkan ini
+    role: string;
+    rating: number;
+    avatar: string;
+    is_active: boolean;
 }
 
 const breadcrumbs: BreadcrumbItem[] = [
-    // { title: 'Dashboard', href: route('admin.dashboard') },
-    { title: 'Manajemen Produk', href: route('admin.products.index') },
+    { title: 'Manajemen Testimoni', href: route('admin.testimonials.index') },
 ];
 
-export default function ProductIndex() {
-    const { products } = usePage<{ products: Product[] }>().props;
-    
-    // State untuk modal delete confirmation
+export default function TestimonialIndex() {
+    const { testimonials } = usePage<{ testimonials: Testimonial[] }>().props;
+
     const [deleteModal, setDeleteModal] = useState<{
         show: boolean;
-        product: Product | null;
-    }>({ show: false, product: null });
+        testimonial: Testimonial | null;
+    }>({ show: false, testimonial: null });
 
-    function showDeleteConfirmation(product: Product) {
-        setDeleteModal({ show: true, product });
+    function showDeleteConfirmation(testimonial: Testimonial) {
+        setDeleteModal({ show: true, testimonial });
     }
 
     function hideDeleteConfirmation() {
-        setDeleteModal({ show: false, product: null });
+        setDeleteModal({ show: false, testimonial: null });
     }
 
     function handleDelete() {
-        if (deleteModal.product) {
-            // Menggunakan router.delete dari Inertia
-            router.delete(route('admin.products.destroy', deleteModal.product.id), {
-                onSuccess: () => {
-                    hideDeleteConfirmation();
-                }
+        if (deleteModal.testimonial) {
+            router.delete(route('admin.testimonials.destroy', deleteModal.testimonial.id), {
+                onSuccess: () => hideDeleteConfirmation()
             });
         }
     }
 
-    const formatRupiah = (price: number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price);
-
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Manajemen Produk" />
-            
+            <Head title="Manajemen Testimoni" />
+
             <div className="flex justify-between items-center mb-6 p-10">
-                <h1 className="text-2xl font-semibold">Daftar Produk</h1>
+                <h1 className="text-2xl font-semibold">Daftar Testimoni</h1>
                 <Button asChild>
-                    <Link href={route('admin.products.create')}>
+                    <Link href={route('admin.testimonials.create')}>
                         <PlusIcon className="w-4 h-4" />
-                        Tambah Produk Baru
+                        Tambah Testimoni Baru
                     </Link>
                 </Button>
             </div>
-            
+
             <div className="bg-card p-4 sm:p-6 rounded-lg shadow-sm">
-                {products.length === 0 ? (
+                {testimonials.length === 0 ? (
                     <div className="text-center py-8">
-                        <Alert variant="destructive" className="max-w-md mx-auto">
-                            <ExclamationTriangleIcon />
-                            <AlertTitle>Belum Ada Produk</AlertTitle>
-                            <AlertDescription>
-                                Belum ada produk yang dibuat. Klik tombol "Tambah Produk Baru" untuk membuat produk pertama.
-                            </AlertDescription>
-                        </Alert>
+                        {/* Alert jika kosong */}
                     </div>
                 ) : (
                     <table className="w-full text-left">
                         <thead className="border-b">
                             <tr>
-                                <th className="p-4">Gambar</th>
-                                <th className="p-4">Nama Produk</th>
-                                <th className="p-4">Kategori</th>
-                                <th className="p-4">Harga</th>
+                                <th className="p-4">Avatar</th>
+                                <th className="p-4">Nama</th>
+                                <th className="p-4">Jabatan</th>
+                                <th className="p-4 text-center">Rating</th>
+                                <th className="p-4 text-center">Status</th>
                                 <th className="p-4">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {products.map((product) => (
-                                <tr key={product.id} className="border-b">
+                            {testimonials.map((testimonial) => (
+                                <tr key={testimonial.id} className="border-b">
                                     <td className="p-4">
-                                        <img src={`/storage/${product.image_path}`} alt={product.name} className="w-24 h-24 object-cover rounded-md" />
+                                        <img src={testimonial.avatar ? `/storage/${testimonial.avatar}` : 'https://ui-avatars.com/api/?name='+testimonial.name} alt={testimonial.name} className="w-16 h-16 object-cover rounded-full" />
                                     </td>
-                                    <td className="p-4 font-medium">{product.name}</td>
-                                    <td className="p-4">{product.category.name}</td>
-                                    <td className="p-4">{formatRupiah(product.price)}</td>
-                                    {/* --- TAMBAHKAN KOLOM UNGGULAN --- */}
+                                    <td className="p-4 font-medium">{testimonial.name}</td>
+                                    <td className="p-4">{testimonial.role}</td>
+                                    <td className="p-4 text-center">{testimonial.rating} ★</td>
                                     <td className="p-4 text-center">
                                         <Button
-                                            variant={product.is_featured ? 'default' : 'outline'}
-                                            size="icon"
-                                            onClick={() => router.put(route('admin.products.toggleFeatured', product.id), {}, {
-                                                preserveScroll: true, // Agar halaman tidak scroll ke atas
-                                            })}
-                                            title={product.is_featured ? 'Hapus dari Unggulan' : 'Jadikan Unggulan'}
+                                            variant={testimonial.is_active ? 'default' : 'outline'}
+                                            size="sm"
+                                            onClick={() => router.put(route('admin.testimonials.toggleActive', testimonial.id), {}, { preserveScroll: true })}
+                                            title={testimonial.is_active ? 'Nonaktifkan' : 'Aktifkan'}
                                         >
-                                            <StarIcon className={`w-5 h-5 ${product.is_featured ? 'text-yellow-400' : 'text-gray-400'}`} />
+                                            {testimonial.is_active ? <EyeIcon className="w-5 h-5"/> : <EyeSlashIcon className="w-5 h-5"/>}
                                         </Button>
                                     </td>
-                                    {/* ---------------------------------- */}
-
                                     <td className="p-4">
                                         <div className="flex gap-2">
                                             <Button variant="outline" size="icon" asChild>
-                                                <Link href={route('admin.products.edit', product.id)}>
+                                                <Link href={route('admin.testimonials.edit', testimonial.id)}>
                                                     <PencilSquareIcon className="w-4 h-4" />
                                                 </Link>
                                             </Button>
-                                            
                                             <Button 
                                                 variant="destructive" 
                                                 size="icon" 
-                                                onClick={() => showDeleteConfirmation(product)}
+                                                onClick={() => showDeleteConfirmation(testimonial)}
                                             >
                                                 <TrashIcon className="w-4 h-4" />
                                             </Button>
@@ -159,7 +139,7 @@ export default function ProductIndex() {
                             <ExclamationTriangleIcon />
                             <AlertTitle>Peringatan!</AlertTitle>
                             <AlertDescription>
-                                Apakah Anda yakin ingin menghapus produk "{deleteModal.product?.name}"? 
+                                Apakah Anda yakin ingin menghapus produk "{deleteModal.testimonial?.name}"? 
                                 Tindakan ini tidak dapat dibatalkan.
                             </AlertDescription>
                         </Alert>
@@ -182,7 +162,6 @@ export default function ProductIndex() {
                     </div>
                 </div>
             )}
-
         </AppLayout>
     );
 }

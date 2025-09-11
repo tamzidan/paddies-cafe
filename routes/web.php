@@ -10,7 +10,7 @@ use App\Http\Controllers\PageController;
 */
 
 // Arahkan URL root (homepage) ke method 'home' di PageController
-Route::get('/', [PageController::class, 'home'])->name('home');
+// Route::get('/', [PageController::class, 'home'])->name('home');
 
 // Nanti kita akan tambahkan route lain di sini
 Route::get('/menu', [PageController::class, 'menu'])->name('menu');
@@ -18,7 +18,7 @@ Route::get('/shop', [PageController::class, 'shop'])->name('shop');
 Route::get('/location', [PageController::class, 'location'])->name('location');
 Route::get('/reservasi', [PageController::class, 'reservasi'])->name('reservasi');
 
-Route::get('/single-page', [PageController::class, 'singlePage'])->name('single-page');
+Route::get('/', [PageController::class, 'singlePage'])->name('home');
 
 
 
@@ -33,9 +33,17 @@ Route::prefix('admin')
         Route::resource('sliders', \App\Http\Controllers\Admin\SliderController::class)->except(['show']);
         Route::resource('product-categories', \App\Http\Controllers\Admin\ProductCategoryController::class)->except(['show']);
         Route::resource('products', \App\Http\Controllers\Admin\ProductController::class)->except(['show']);
-    // --- TAMBAHKAN INI ---
+        // --- TAMBAHKAN INI ---
+        Route::put('products/{product}/toggle-featured', [\App\Http\Controllers\Admin\ProductController::class, 'toggleFeatured'])->name('products.toggleFeatured');
+        // ---------------------
+        // --- TAMBAHKAN INI ---
     Route::resource('menu-pdfs', App\Http\Controllers\Admin\MenuPdfController::class)->except(['show']);
     Route::put('menu-pdfs/{menuPdf}/set-active', [App\Http\Controllers\Admin\MenuPdfController::class, 'setActive'])->name('menu-pdfs.setActive');
+    // ---------------------
+
+    // --- TAMBAHKAN INI ---
+    Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class)->except(['show']);
+    Route::put('testimonials/{testimonial}/toggle-active', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleActive'])->name('testimonials.toggleActive');
     // ---------------------
 
 });

@@ -410,6 +410,16 @@ interface Slider {
   order: number;
 }
 
+// Definisikan interface untuk Testimonial
+interface Testimonial {
+    id: number;
+    name: string;
+    role: string;
+    content: string;
+    rating: number;
+    avatar?: string;
+}
+
 interface ProductCategory {
   id: number;
   name: string;
@@ -421,6 +431,7 @@ interface Product {
   description: string;
   price: number;
   category: ProductCategory;
+  is_featured: boolean; // <-- TAMBAHKAN INI
   image_path?: string;
   delivery_link_1?: string;
   delivery_link_2?: string;
@@ -431,7 +442,8 @@ interface CafeWebsiteProps {
   sliders: Slider[];
   products?: Product[];
   categories?: ProductCategory[];
-  menuPdfUrl: string | null; 
+  menuPdfUrl: string | null;
+  testimonials: Testimonial[];
 }
 
 // const [isMapLoading, setIsMapLoading] = useState(true);
@@ -442,7 +454,7 @@ interface CafeWebsiteProps {
 //     setIsMapLoading(false);
 // };
 
-const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categories = [], menuPdfUrl }) => {
+const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categories = [], menuPdfUrl, testimonials }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -483,7 +495,7 @@ const PageContainer: React.FC<PageContainerProps> = ({ children }) => (
 const renderHome = () => {
     // --- PERUBAHAN 1: Tentukan ID produk unggulan di sini ---
     // Ganti angka [1, 3, 5] dengan ID produk yang ingin Anda tampilkan.
-    const featuredProductIds = [2, 4]; 
+    // const featuredProductIds = [2, 4]; 
 
     return (
         <div className="space-y-20 pt-20"> {/* pt-20 untuk memberi ruang di bawah navbar fixed */}
@@ -598,9 +610,9 @@ const renderHome = () => {
                     <p className="text-gray-600 max-w-2xl mx-auto">Cicipi menu-menu favorit pilihan pelanggan kami</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* --- PERUBAHAN 2: Ganti .slice() dengan .filter() --- */}
+                {/* --- UBAH LOGIKA FILTER DI SINI --- */}
                 {products
-                    .filter(product => featuredProductIds.includes(product.id))
+                    .filter(product => product.is_featured) // <-- Filter berdasarkan properti is_featured
                     .map((product) => (
                         <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
                             <div className="h-48 bg-gray-200 flex items-center justify-center">
@@ -624,7 +636,7 @@ const renderHome = () => {
                                 </div>
                             </div>
                         </div>
-                ))}
+                    ))}
                 </div>
             </div>
 
@@ -634,26 +646,30 @@ const renderHome = () => {
                         <h2 className="text-4xl font-bold text-black mb-4">Apa Kata Mereka</h2>
                         <p className="text-gray-600 text-lg max-w-2xl mx-auto">Testimoni dari pelanggan setia Paddies Cafe</p>
                     </div>
-                    <div className="grid md:grid-cols-3 gap-8">
-                    {testimonials.map((testimonial) => (
-                        <div key={testimonial.id} className="bg-white p-8 rounded-2xl shadow-lg relative transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-                            <Quote className="h-8 w-8 text-black mb-4" />
-                            <p className="text-gray-600 mb-6 italic">"{testimonial.content}"</p>
-                            <div className="flex items-center">
-                                <img src={testimonial.avatar} alt={testimonial.name} className="w-12 h-12 rounded-full mr-4 filter grayscale"/>
-                                <div>
-                                    <h4 className="font-bold text-black">{testimonial.name}</h4>
-                                    <p className="text-gray-500 text-sm">{testimonial.role}</p>
-                                </div>
-                            </div>
-                            <div className="flex mt-4">
-                                {[...Array(testimonial.rating)].map((_, i) => (
-                                    <Star key={i} className="h-5 w-5 text-black fill-current" />
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                    </div>
+<div className="grid md:grid-cols-3 gap-8">
+{testimonials.map((testimonial) => ( // <-- `testimonials` ini sekarang dari props
+    <div key={testimonial.id} className="bg-white p-8 rounded-2xl shadow-lg relative transform hover:scale-105 transition-transform duration-300 border border-gray-200">
+        <Quote className="h-8 w-8 text-black mb-4" />
+        <p className="text-gray-600 mb-6 italic">"{testimonial.content}"</p>
+        <div className="flex items-center">
+            <img 
+                src={testimonial.avatar ? `/storage/${testimonial.avatar}` : '/path/to/default/avatar.png'} // <-- Sesuaikan path avatar
+                alt={testimonial.name} 
+                className="w-12 h-12 rounded-full mr-4 filter grayscale"
+            />
+            <div>
+                <h4 className="font-bold text-black">{testimonial.name}</h4>
+                <p className="text-gray-500 text-sm">{testimonial.role}</p>
+            </div>
+        </div>
+        <div className="flex mt-4">
+            {[...Array(testimonial.rating)].map((_, i) => (
+                <Star key={i} className="h-5 w-5 text-black fill-current" />
+            ))}
+        </div>
+    </div>
+))}
+</div>
                 </div>
             </div>
 
@@ -983,17 +999,17 @@ const renderHome = () => {
     </PageContainer>
   );
 
-  const testimonials = [
-    { id: 1, name: "Sarah Wijaya", role: "Food Blogger", content: "Tempat yang sempurna untuk meeting dan bersantai...", rating: 5, avatar: "/storage/profile-picture/orang2.jpg" },
-    { id: 2, name: "Ahmad Fauzi", role: "Entrepreneur", content: "Suasananya cozy banget, wifi kenceng...", rating: 5, avatar: "/storage/profile-picture/orang3.jpg" },
-    { id: 3, name: "Lisa Chen", role: "Designer", content: "Makanannya enak, pelayanan ramah...", rating: 5, avatar: "/storage/profile-picture/orang1.jpg" }
-  ];
+//   const testimonials = [
+//     { id: 1, name: "Sarah Wijaya", role: "Food Blogger", content: "Tempat yang sempurna untuk meeting dan bersantai...", rating: 5, avatar: "/storage/profile-picture/orang2.jpg" },
+//     { id: 2, name: "Ahmad Fauzi", role: "Entrepreneur", content: "Suasananya cozy banget, wifi kenceng...", rating: 5, avatar: "/storage/profile-picture/orang3.jpg" },
+//     { id: 3, name: "Lisa Chen", role: "Designer", content: "Makanannya enak, pelayanan ramah...", rating: 5, avatar: "/storage/profile-picture/orang1.jpg" }
+//   ];
 
   return (
         <div className="min-h-screen bg-white flex flex-col">
             <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
             <main className="flex-grow">
-                {activeSection === 'home' && renderHome()}
+                {activeSection === 'home' && renderHome()} {/* Pastikan testimonials di-pass ke renderHome jika perlu, atau gunakan dari scope CafeWebsite */}
                 {activeSection === 'menu' && renderMenu()}
                 {activeSection === 'shop' && renderShop()}
                 {activeSection === 'location' && renderLocation()}

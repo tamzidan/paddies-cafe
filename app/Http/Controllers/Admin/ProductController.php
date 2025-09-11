@@ -44,6 +44,7 @@ class ProductController extends Controller
             'product_category_id' => 'required|exists:product_categories,id',
             'description' => 'required|string',
             'price' => 'required|integer|min:0',
+            'is_featured' => 'nullable|boolean', // <-- TAMBAHKAN VALIDASI
             'image' => 'required|image',
             'delivery_link_1' => 'nullable|url',
             'delivery_link_3' => 'nullable|url',
@@ -57,6 +58,7 @@ class ProductController extends Controller
             'product_category_id' => $request->product_category_id,
             'description' => $request->description,
             'price' => $request->price,
+            'is_featured' => $request->boolean('is_featured'), // <-- TANGANI INPUT
             'image_path' => $imagePath,
             'delivery_link_1' => $request->delivery_link_1,
             'delivery_link_3' => $request->delivery_link_3,
@@ -91,8 +93,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        // Validasi sama seperti store, tapi image boleh null
-        // ... (kode validasi) ...
+        $request->validate([ // <-- Tambahkan validasi juga di sini
+             'name' => 'required|string|max:255',
+             'product_category_id' => 'required|exists:product_categories,id',
+             'description' => 'required|string',
+             'price' => 'required|integer|min:0',
+             'is_featured' => 'nullable|boolean',
+             'image' => 'nullable|image', // image nullable saat update
+             'delivery_link_1' => 'nullable|url',
+             'delivery_link_3' => 'nullable|url',
+             'delivery_link_2' => 'nullable|url',
+        ]);
 
         $imagePath = $product->image_path;
         if ($request->hasFile('image')) {
@@ -106,6 +117,7 @@ class ProductController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'product_category_id' => $request->product_category_id,
+            'is_featured' => $request->boolean('is_featured'), // <-- TANGANI INPUT
             'image_path' => $imagePath,
             'description' => $request->description,
             'delivery_link_1' => $request->delivery_link_1,
@@ -128,4 +140,11 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.index')->with('success', 'Produk berhasil dihapus.');
     }
+
+    public function toggleFeatured(Product $product)
+    {
+        $product->update(['is_featured' => !$product->is_featured]);
+        return redirect()->back()->with('success', 'Status unggulan produk diperbarui.');
+    }
+
 }
