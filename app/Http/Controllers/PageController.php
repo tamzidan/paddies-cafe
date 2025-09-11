@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FeaturedProduct;
 use App\Models\MenuPdf;
 use App\Models\Product;
-use App\Models\ProductCategory;
 // Tambahkan import model di atas
+use App\Models\ProductCategory;
 use App\Models\Slider; // <--- Impor model Slider kita
 use App\Models\Testimonial; // <-- Tambahkan ini di atas
 use Illuminate\Http\Request;
@@ -37,12 +38,18 @@ class PageController extends Controller
         $activeMenu = MenuPdf::where('is_active', true)->first();
         $testimonials = Testimonial::where('is_active', true)->latest()->get(); // <-- TAMBAHKAN INI
 
+        // --- TAMBAHKAN INI ---
+        $featuredProducts = FeaturedProduct::with('product.category') // Eager load product & category-nya
+                                      ->orderBy('order')
+                                      ->get();
+
         return Inertia::render('CafeWebsite', [
             'sliders' => $sliders,
             'products' => $products,
             'categories' => $categories,
             'menuPdfUrl' => $activeMenu ? $activeMenu->url : null,
-            'testimonials' => $testimonials
+            'testimonials' => $testimonials,
+            'featuredProducts' => $featuredProducts, // <-- KIRIM SEBAGAI PROP
         ]);
     }
 

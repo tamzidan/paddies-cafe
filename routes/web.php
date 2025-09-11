@@ -46,6 +46,12 @@ Route::prefix('admin')
     Route::put('testimonials/{testimonial}/toggle-active', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleActive'])->name('testimonials.toggleActive');
     // ---------------------
 
+        // --- TAMBAHKAN INI ---
+        Route::resource('featured-products', \App\Http\Controllers\Admin\FeaturedProductController::class)->except(['show']);
+        Route::put('testimonials/{testimonial}/toggle-active', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleActive'])->name('testimonials.toggleActive');
+
+        // ---------------------
+
 });
 
 require __DIR__.'/settings.php';

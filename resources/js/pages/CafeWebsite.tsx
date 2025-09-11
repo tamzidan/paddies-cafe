@@ -139,7 +139,7 @@ const Footer = ({ setActiveSection }: any) => {
         <footer className="bg-black text-white mt-auto">
             {/* Main Footer Content */}
             <div className="container mx-auto px-6 py-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
                     
                     {/* Brand Section */}
                     <div className="lg:col-span-1">
@@ -148,7 +148,7 @@ const Footer = ({ setActiveSection }: any) => {
                             <h3 className="text-3xl font-bold text-white">Paddies Cafe</h3>
                         </div>
                         <p className="text-gray-300 mb-6 leading-relaxed">
-                            Tempat favorit untuk menikmati kopi berkualitas tinggi, makanan lezat, 
+                            Tempat favorit untuk menikmati kopi, makanan lezat, 
                             dan suasana yang nyaman bersama keluarga dan teman.
                         </p>
                         <div className="flex space-x-4">
@@ -210,8 +210,8 @@ const Footer = ({ setActiveSection }: any) => {
                     </div>
 
                     {/* Opening Hours */}
-                    <div>
-                        <h4 className="text-xl font-bold mb-6 text-white">Jam Buka</h4>
+                    {/* <div> */}
+                        {/* <h4 className="text-xl font-bold mb-6 text-white">Jam Buka</h4>
                         <div className="space-y-3">
                             <div className="flex items-center space-x-3">
                                 <Clock className="h-5 w-5 text-white flex-shrink-0" />
@@ -224,34 +224,16 @@ const Footer = ({ setActiveSection }: any) => {
                                 <p className="font-semibold text-white">Selasa - Minggu</p>
                                 <p>10:00 - 22:00</p>
                             </div>
-                        </div>
+                        </div> */}
                         
                         {/* Special Notice */}
-                        <div className="mt-6 p-4 bg-white/10 rounded-lg border border-white/20 backdrop-blur-sm">
+                        {/* <div className="mt-6 p-4 bg-white/10 rounded-lg border border-white/20 backdrop-blur-sm">
                             <p className="text-white text-sm font-medium">
                                 ☕ Happy Hour: 15:00-17:00<br />
                                 <span className="text-gray-300">Diskon 20% untuk semua minuman!</span>
                             </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Newsletter Section */}
-            <div className="border-t border-gray-700">
-                <div className="container mx-auto px-6 py-8">
-                    <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-                        <div className="text-center md:text-left">
-                            <h4 className="text-xl font-bold text-white mb-2">Dapatkan Update Terbaru</h4>
-                            <p className="text-gray-300">Berlangganan newsletter untuk promo dan menu terbaru</p>
-                        </div>
-                        <div className="flex space-x-2 w-full md:w-auto">
-                            <input type="email" placeholder="Masukkan email Anda" className="px-4 py-3 bg-white/10 text-white placeholder-gray-400 rounded-lg border border-white/20 focus:border-white focus:outline-none flex-1 md:w-64 backdrop-blur-sm" />
-                            <button className="px-8 py-3 bg-white hover:bg-gray-200 text-black rounded-lg font-semibold transition-all duration-300 whitespace-nowrap transform hover:scale-105">
-                                Daftar
-                            </button>
-                        </div>
-                    </div>
+                        </div> */}
+                    {/* </div> */}
                 </div>
             </div>
 
@@ -270,7 +252,7 @@ const Footer = ({ setActiveSection }: any) => {
                         <div className="flex items-center space-x-2 text-gray-400 text-sm">
                             <span>Made with</span>
                             <Heart className="h-4 w-4 text-white fill-current animate-pulse" />
-                            <span>by a cool developer</span>
+                            <span>by a <a href="https://tamzidan.com" className="hover:text-white transition-colors duration-300 hover:underline">cool developer</a></span>
                         </div>
                     </div>
                 </div>
@@ -420,6 +402,11 @@ interface Testimonial {
     avatar?: string;
 }
 
+interface FeaturedProductData {
+    id: number;
+    product: Product; // Kita bisa gunakan lagi interface Product yang sudah ada
+}
+
 interface ProductCategory {
   id: number;
   name: string;
@@ -444,6 +431,7 @@ interface CafeWebsiteProps {
   categories?: ProductCategory[];
   menuPdfUrl: string | null;
   testimonials: Testimonial[];
+  featuredProducts: FeaturedProductData[]; // <-- TAMBAHKAN PROPS BARU
 }
 
 // const [isMapLoading, setIsMapLoading] = useState(true);
@@ -454,7 +442,7 @@ interface CafeWebsiteProps {
 //     setIsMapLoading(false);
 // };
 
-const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categories = [], menuPdfUrl, testimonials }) => {
+const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categories = [], menuPdfUrl, testimonials, featuredProducts }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
@@ -498,8 +486,8 @@ const renderHome = () => {
     // const featuredProductIds = [2, 4]; 
 
     return (
-        <div className="space-y-20 pt-20"> {/* pt-20 untuk memberi ruang di bawah navbar fixed */}
-            <div className="relative w-full -mt-20"> {/* -mt-20 untuk meniadakan padding top pada elemen pertama */}
+        <div className="space-y-20 pt-20"> 
+            <div className="relative w-full -mt-7 overflow-hidden"> {/* -mt-20 untuk meniadakan padding top pada elemen pertama */}
                 <Swiper
                     modules={[SwiperNavigation, Pagination, Autoplay, EffectFade]}
                     spaceBetween={0}
@@ -534,8 +522,11 @@ const renderHome = () => {
                                         />
                                         {/* <h1 className="text-5xl md:text-7xl font-bold">Paddies Cafe</h1> */}
                                     </div>
-                                    <p className="text-xl md:text-2xl mb-8 text-gray-200">
-                                        Tempat terbaik untuk menikmati kopi berkualitas tinggi dan suasana yang nyaman
+                                    <p className="text-xl md:text-2xl mb-4 text-gray-200">
+                                        Tempat terbaik untuk menikmati kopi dengan suasana yang nyaman.
+                                    </p>
+                                    <p className="text-xl md:text-2xl mb-4 text-gray-200">
+                                        #DariRasaCeritaBermula
                                     </p>
                                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                         <button onClick={() => setActiveSection('menu')} className="bg-white hover:bg-black hover:text-white text-black px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center border-2 border-white cursor-pointer">
@@ -553,13 +544,37 @@ const renderHome = () => {
                     ))}
                 </Swiper>
                 
-                <style>{`
-                    .custom-swiper .swiper-button-next, .custom-swiper .swiper-button-prev { background-color: rgba(0, 0, 0, 0.5); border-radius: 50%; width: 44px; height: 44px; color: #ffffff; transition: background-color 0.3s ease; }
-                    .custom-swiper .swiper-button-next:hover, .custom-swiper .swiper-button-prev:hover { background-color: #000000; }
-                    .custom-swiper .swiper-button-next::after, .custom-swiper .swiper-button-prev::after { font-size: 20px; }
-                    .custom-swiper .swiper-pagination-bullet { background-color: #ffffff; opacity: 0.7; }
-                    .custom-swiper .swiper-pagination-bullet-active { background-color: #ffffff; opacity: 1; }
-                `}</style>
+<style>{`
+    /* === Hero Slider Styles === */
+    .custom-swiper .swiper-button-next, .custom-swiper .swiper-button-prev { background-color: rgba(0, 0, 0, 0.5); border-radius: 50%; width: 44px; height: 44px; color: #ffffff; transition: background-color 0.3s ease; }
+    .custom-swiper .swiper-button-next:hover, .custom-swiper .swiper-button-prev:hover { background-color: #000000; }
+    .custom-swiper .swiper-button-next::after, .custom-swiper .swiper-button-prev::after { font-size: 20px; }
+    .custom-swiper .swiper-pagination-bullet { background-color: #ffffff; opacity: 0.7; }
+    .custom-swiper .swiper-pagination-bullet-active { background-color: #ffffff; opacity: 1; }
+
+    /* === Marquee Animation Styles === */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      /* Geser sejauh 50% karena kita punya 2 set konten */
+      100% { transform: translateX(-50%); } 
+    }
+
+    .animate-marquee {
+      /* Durasi bisa disesuaikan, semakin besar semakin lambat */
+      animation: marquee 10s linear infinite;
+    }
+    
+    .group-hover\\:pause:hover {
+      animation-play-state: paused;
+    }
+
+    /* Opsi untuk pengguna yang tidak ingin ada gerakan */
+    @media (prefers-reduced-motion: reduce) {
+      .animate-marquee {
+        animation: none;
+      }
+    }
+`}</style>
             </div>
 
             <div className="container mx-auto px-4">
@@ -610,69 +625,122 @@ const renderHome = () => {
                     <p className="text-gray-600 max-w-2xl mx-auto">Cicipi menu-menu favorit pilihan pelanggan kami</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* --- UBAH LOGIKA FILTER DI SINI --- */}
-                {products
-                    .filter(product => product.is_featured) // <-- Filter berdasarkan properti is_featured
-                    .map((product) => (
-                        <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
-                            <div className="h-48 bg-gray-200 flex items-center justify-center">
-                                {product.image_path ? (
-                                <img 
-                                    src={`/storage/${product.image_path}`} 
-                                    alt={product.name}
-                                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                                />
-                                ) : ( <ImageIcon className="h-16 w-16 text-gray-400" /> )}
-                            </div>
-                            <div className="p-6">
-                                <h3 className="font-bold text-black mb-2">{product.name}</h3>
-                                <p className="text-gray-600 text-sm mb-4">{product.description}</p>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-2xl font-bold text-black">{formatRupiah(product.price)}</span>
-                                    <div className="flex items-center text-yellow-500">
-                                        <Star className="h-4 w-4 fill-current" />
-                                        <span className="text-sm ml-1">4.8</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+        {/* --- GANTI LOGIKA LOOPING DI SINI --- */}
+        {featuredProducts.map(({ product }) => ( // Destructuring untuk langsung dapat object product
+            <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
+                <div className="h-48 bg-gray-200 flex items-center justify-center">
+                    {product.image_path ? (
+                        <img 
+                            src={`/storage/${product.image_path}`} 
+                            alt={product.name}
+                            className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                        />
+                    ) : ( <ImageIcon className="h-16 w-16 text-gray-400" /> )}
+                </div>
+                <div className="p-6">
+                    <h3 className="font-bold text-black mb-2">{product.name}</h3>
+                    <p className="text-gray-600 text-sm mb-4">{product.description}</p>
+                    <div className="flex justify-between items-center">
+                        <span className="text-2xl font-bold text-black">{formatRupiah(product.price)}</span>
+                        {/* ... (bintang rating jika ada) ... */}
+                    </div>
+                </div>
+            </div>
+        ))}
                 </div>
             </div>
 
-            <div className="pt-20 bg-gray-50">
-                <div className="container mx-auto px-6">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl font-bold text-black mb-4">Apa Kata Mereka</h2>
-                        <p className="text-gray-600 text-lg max-w-2xl mx-auto">Testimoni dari pelanggan setia Paddies Cafe</p>
-                    </div>
-<div className="grid md:grid-cols-3 gap-8">
-{testimonials.map((testimonial) => ( // <-- `testimonials` ini sekarang dari props
-    <div key={testimonial.id} className="bg-white p-8 rounded-2xl shadow-lg relative transform hover:scale-105 transition-transform duration-300 border border-gray-200">
-        <Quote className="h-8 w-8 text-black mb-4" />
-        <p className="text-gray-600 mb-6 italic">"{testimonial.content}"</p>
-        <div className="flex items-center">
-            <img 
-                src={testimonial.avatar ? `/storage/${testimonial.avatar}` : '/path/to/default/avatar.png'} // <-- Sesuaikan path avatar
-                alt={testimonial.name} 
-                className="w-12 h-12 rounded-full mr-4 filter grayscale"
-            />
-            <div>
-                <h4 className="font-bold text-black">{testimonial.name}</h4>
-                <p className="text-gray-500 text-sm">{testimonial.role}</p>
-            </div>
+<div className="py-20 bg-gray-50"> 
+    <div className="container mx-auto px-6">
+        <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-black mb-4">Apa Kata Mereka</h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Testimoni dari pelanggan setia Paddies Cafe</p>
         </div>
-        <div className="flex mt-4">
-            {[...Array(testimonial.rating)].map((_, i) => (
-                <Star key={i} className="h-5 w-5 text-black fill-current" />
+    </div>
+
+    <div className="relative group w-full overflow-hidden">
+        {/* Gradient overlays for smooth fade effect */}
+        <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none md:w-32"></div>
+        <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none md:w-32"></div>
+        
+        <div className="flex animate-marquee group-hover:pause cursor-pointer">
+            {/* Set Testimoni Pertama */}
+            {testimonials.map((testimonial) => (
+              <div 
+                key={`orig-${testimonial.id}`}
+                className="flex-shrink-0 w-[80vw] sm:w-[45vw] md:w-80 mx-4 bg-white p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300"
+              >
+                {/* ... Konten kartu testimoni (tidak ada perubahan di sini) ... */}
+                <Quote className="h-6 w-6 text-black mb-3" />
+                <p className="text-gray-600 mb-4 italic text-sm leading-relaxed h-24 overflow-auto">
+                  "{testimonial.content}"
+                </p>
+                <div className="flex items-center mb-3">
+                  <img 
+                    src={testimonial.avatar ? `/storage/${testimonial.avatar}` : `https://ui-avatars.com/api/?name=${testimonial.name}&background=random`}
+                    alt={testimonial.name} 
+                    className="w-10 h-10 rounded-full mr-3 object-cover filter grayscale"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-black text-sm">{testimonial.name}</h4>
+                    <p className="text-gray-500 text-xs">{testimonial.role}</p>
+                  </div>
+                </div>
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className={`h-4 w-4 ${
+                        i < testimonial.rating 
+                          ? 'text-yellow-400 fill-current' 
+                          : 'text-gray-300'
+                      }`} 
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* Set Testimoni Kedua (Duplikat untuk efek loop) */}
+            {testimonials.map((testimonial) => (
+              <div 
+                key={`copy-${testimonial.id}`}
+                aria-hidden="true"
+                className="flex-shrink-0 w-[80vw] sm:w-[45vw] md:w-80 mx-4 bg-white p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300"
+              >
+                 {/* ... Konten kartu testimoni (tidak ada perubahan di sini) ... */}
+                 <Quote className="h-6 w-6 text-black mb-3" />
+                <p className="text-gray-600 mb-4 italic text-sm leading-relaxed h-24 overflow-auto">
+                  "{testimonial.content}"
+                </p>
+                <div className="flex items-center mb-3">
+                  <img 
+                    src={testimonial.avatar ? `/storage/${testimonial.avatar}` : `https://ui-avatars.com/api/?name=${testimonial.name}&background=random`}
+                    alt={testimonial.name} 
+                    className="w-10 h-10 rounded-full mr-3 object-cover filter grayscale"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-black text-sm">{testimonial.name}</h4>
+                    <p className="text-gray-500 text-xs">{testimonial.role}</p>
+                  </div>
+                </div>
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className={`h-4 w-4 ${
+                        i < testimonial.rating 
+                          ? 'text-yellow-400 fill-current' 
+                          : 'text-gray-300'
+                      }`} 
+                    />
+                  ))}
+                </div>
+              </div>
             ))}
         </div>
     </div>
-))}
 </div>
-                </div>
-            </div>
-
             {/* About Section */}
             <div className="py-20 bg-black text-white mt-0">
                 <div className="container mx-auto px-6">
@@ -683,7 +751,7 @@ const renderHome = () => {
                             </h2>
                             <p className="text-gray-300 text-lg mb-6 leading-relaxed">
                                 Sejak 2020, Paddies Cafe telah menjadi destinasi favorit para pecinta kopi di Bandung Timur. 
-                                Kami berkomitmen untuk menyajikan kopi berkualitas tinggi dari biji pilihan terbaik, 
+                                Kami berkomitmen untuk menyajikan kopi dari biji pilihan, 
                                 dikombinasikan dengan makanan lezat dan suasana yang hangat dan nyaman.
                             </p>
                             <div className="space-y-4">
@@ -900,7 +968,7 @@ const renderHome = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
+            {/* <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="flex items-start mb-4">
                 <Clock className="h-6 w-6 text-black mt-1 mr-3 flex-shrink-0" />
                 <div>
@@ -911,11 +979,11 @@ const renderHome = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="bg-black text-white p-6 rounded-lg">
               <h3 className="font-bold text-lg mb-4">Informasi Tambahan</h3>
               <ul className="space-y-2 text-gray-300">
-                <li>• Parkir gratis tersedia</li><li>• Akses WiFi unlimited</li><li>• Area smoking dan non-smoking</li><li>• Tersedia power outlet di setiap meja</li><li>• Pet friendly (area tertentu)</li>
+                <li>• Parkir gratis tersedia</li><li>• Akses WiFi unlimited</li><li>• Area smoking dan non-smoking</li><li>• Tersedia power outlet di setiap meja</li><li>• Pet friendly (area tertentu)</li><li>• Musala</li>
               </ul>
             </div>
           </div>
@@ -999,17 +1067,11 @@ const renderHome = () => {
     </PageContainer>
   );
 
-//   const testimonials = [
-//     { id: 1, name: "Sarah Wijaya", role: "Food Blogger", content: "Tempat yang sempurna untuk meeting dan bersantai...", rating: 5, avatar: "/storage/profile-picture/orang2.jpg" },
-//     { id: 2, name: "Ahmad Fauzi", role: "Entrepreneur", content: "Suasananya cozy banget, wifi kenceng...", rating: 5, avatar: "/storage/profile-picture/orang3.jpg" },
-//     { id: 3, name: "Lisa Chen", role: "Designer", content: "Makanannya enak, pelayanan ramah...", rating: 5, avatar: "/storage/profile-picture/orang1.jpg" }
-//   ];
-
   return (
-        <div className="min-h-screen bg-white flex flex-col">
+        <div className="min-h-screen bg-white flex flex-col flex h-full flex-1 overflow-x-auto">
             <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
-            <main className="flex-grow">
-                {activeSection === 'home' && renderHome()} {/* Pastikan testimonials di-pass ke renderHome jika perlu, atau gunakan dari scope CafeWebsite */}
+            <main className="flex-grow overflow-hidden"> 
+                {activeSection === 'home' && renderHome()}
                 {activeSection === 'menu' && renderMenu()}
                 {activeSection === 'shop' && renderShop()}
                 {activeSection === 'location' && renderLocation()}

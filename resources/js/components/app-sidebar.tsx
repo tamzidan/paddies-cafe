@@ -38,6 +38,12 @@ const mainNavItems: NavItem[] = [
         href: '/admin/testimonials',
         icon: LayoutGrid,
     },
+    {
+        title: 'Manajemen Menu Unggulan',
+        href: '/admin/featured-products',
+        icon: LayoutGrid,
+    },
+
 ];
 
 const footerNavItems: NavItem[] = [
