@@ -17,6 +17,15 @@ class MenuPdf extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'is_active' => 'boolean', // <--- TAMBAHKAN BARIS INI
+    ];
+
+    /**
      * Accessor untuk mendapatkan URL publik file PDF.
      */
     public function getUrlAttribute()
