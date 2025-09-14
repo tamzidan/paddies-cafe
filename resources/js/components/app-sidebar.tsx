@@ -4,57 +4,29 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutGrid, Image, Star, MessageSquare, Box } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/admin/dashboard',
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Manajemen Slider',
-        href: '/admin/sliders',
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Manajemen Category Products',
-        href: '/admin/product-categories',
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Manajemen Produk',
-        href: '/admin/products',
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Manajemen Menu',
-        href: '/admin/menu-pdfs',
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Manajemen Testimonials',
-        href: '/admin/testimonials',
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Manajemen Menu Unggulan',
-        href: '/admin/featured-products',
-        icon: LayoutGrid,
-    },
-
+  { title: 'Dashboard', href: '/admin/dashboard', icon: LayoutGrid },
+  { title: 'Slider', href: '/admin/sliders', icon: Image },
+  { title: 'Kategori Produk', href: '/admin/product-categories', icon: Folder },
+  { title: 'Produk', href: '/admin/products', icon: Box },
+  { title: 'Menu', href: '/admin/menu-pdfs', icon: BookOpen },
+  { title: 'Testimoni', href: '/admin/testimonials', icon: MessageSquare },
+  { title: 'Produk Unggulan', href: '/admin/featured-products', icon: Star },
+  { title: 'Galeri', href: '/admin/galleries', icon: Image },
 ];
 
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/tamzidan/meracik-coffee.git',
+        href: 'https://github.com/tamzidan/paddies-cafe.git',
         icon: Folder,
     },
     {
         title: 'Documentation',
-        href: 'https://github.com/tamzidan/meracik-coffee/tree/main/documentation',
+        href: 'https://github.com/tamzidan/paddies-cafe/documentation',
         icon: BookOpen,
     },
 ];
@@ -69,9 +41,6 @@ export function AppSidebar() {
                             <Link href="/admin/dashboard" prefetch>
                                 <AppLogo />
                             </Link>
-                            {/* <Link href="/dashboard" prefetch>
-                                <AppLogo />
-                            </Link> */}
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>

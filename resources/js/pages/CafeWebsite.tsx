@@ -1,4 +1,5 @@
 import React, { useState, ReactNode, useMemo } from 'react';
+import AppLogoIcon from '../components/app-logo-icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation as SwiperNavigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import { 
@@ -11,6 +12,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
+// import AppLogo from '../resources/js/components/app-logo';
 
 const Navbar = ({ activeSection, setActiveSection }: any) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,10 +31,11 @@ const Navbar = ({ activeSection, setActiveSection }: any) => {
     return (
         <nav className="bg-white shadow-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 cursor-pointer transition-all duration-300 transform hover:scale-105">
+                        <AppLogoIcon className="fill-current text-white dark:text-white rounded-full size-10 shadow-md" />
                     <button
                         onClick={() => handleNavClick('home')}
-                        className="font-bold text-2xl text-black hover:text-gray-700 transition-colors duration-300"
+                        className="font-bold text-2xl text-black cursor-pointer"
                     >
                         Paddies Cafe
                     </button>

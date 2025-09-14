@@ -36,7 +36,7 @@ export default function MenuPdfIndex() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Manajemen Menu PDF" />
             
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-6 p-10">
                 <h1 className="text-2xl font-semibold">Daftar Menu PDF</h1>
                 <Button asChild>
                     <Link href={route('admin.menu-pdfs.create')}>
