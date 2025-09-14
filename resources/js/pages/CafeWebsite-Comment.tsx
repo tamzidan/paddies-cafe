@@ -7,28 +7,38 @@ import {
     ChevronRight, Wifi, Play, Quote, Car, Music, Utensils, ChefHat, CalendarCheck, Trees,
     Loader2, FileText, ZoomIn, ZoomOut, RotateCw, Maximize2, ExternalLink, Twitter, Heart, AlertCircle
 } from 'lucide-react';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 
+// =================================================================================
+// KOMPONEN NAVBAR BARU
+// =================================================================================
 const Navbar = ({ activeSection, setActiveSection }: any) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     const navLinks = [
         { id: 'home', text: 'Home' },
         { id: 'menu', text: 'Menu' },
         { id: 'shop', text: 'Shop' },
         { id: 'location', text: 'Location' },
     ];
+
     const isActiveLink = (id: string) => activeSection === id;
+
     const handleNavClick = (id: string) => {
         setActiveSection(id);
-        setIsMenuOpen(false);
+        setIsMenuOpen(false); // Tutup menu mobile setelah link diklik
     };
+
     return (
         <nav className="bg-white shadow-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+                {/* Logo atau Nama Brand */}
                 <div className="flex items-center space-x-2">
+                    {/* <Coffee className="h-8 w-8 text-black" /> */}
                     <button
                         onClick={() => handleNavClick('home')}
                         className="font-bold text-2xl text-black hover:text-gray-700 transition-colors duration-300"
@@ -36,6 +46,8 @@ const Navbar = ({ activeSection, setActiveSection }: any) => {
                         Paddies Cafe
                     </button>
                 </div>
+
+                {/* Navigasi untuk Desktop */}
                 <div className="hidden md:flex items-center space-x-8">
                     {navLinks.map((link) => (
                         <button
@@ -51,6 +63,8 @@ const Navbar = ({ activeSection, setActiveSection }: any) => {
                         </button>
                     ))}
                 </div>
+
+                {/* Tombol CTA Desktop */}
                 <div className="hidden md:block">
                     <button
                         onClick={() => handleNavClick('reservasi')}
@@ -59,6 +73,8 @@ const Navbar = ({ activeSection, setActiveSection }: any) => {
                         Reservasi
                     </button>
                 </div>
+
+                {/* Tombol Hamburger untuk Mobile */}
                 <div className="md:hidden">
                     <button
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -69,6 +85,8 @@ const Navbar = ({ activeSection, setActiveSection }: any) => {
                     </button>
                 </div>
             </div>
+
+            {/* Menu Mobile dengan Animasi */}
             <div className={`md:hidden transition-all duration-300 ease-in-out ${
                 isMenuOpen ? 'max-h-96 opacity-100 visible' : 'max-h-0 opacity-0 invisible'
             } overflow-hidden`}>
@@ -87,6 +105,8 @@ const Navbar = ({ activeSection, setActiveSection }: any) => {
                             {link.text}
                         </button>
                     ))}
+                    
+                    {/* CTA Mobile */}
                     <div className="px-6 py-4 border-t border-gray-100">
                         <button
                             onClick={() => handleNavClick('reservasi')}
@@ -101,8 +121,12 @@ const Navbar = ({ activeSection, setActiveSection }: any) => {
     );
 };
 
+// =================================================================================
+// KOMPONEN FOOTER BARU
+// =================================================================================
 const Footer = ({ setActiveSection }: any) => {
     const currentYear = new Date().getFullYear();
+
     const quickLinks = [
         { name: 'Home', id: 'home' },
         { name: 'Menu', id: 'menu' },
@@ -110,10 +134,14 @@ const Footer = ({ setActiveSection }: any) => {
         { name: 'Location', id: 'location' },
         { name: 'Reservasi', id: 'reservasi' }
     ];
+
     return (
         <footer className="bg-black text-white mt-auto">
+            {/* Main Footer Content */}
             <div className="container mx-auto px-6 py-16">
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
+                    
+                    {/* Brand Section */}
                     <div className="lg:col-span-1">
                         <div className="flex items-center space-x-2 mb-6">
                             <Coffee className="h-10 w-10 text-white" />
@@ -135,6 +163,8 @@ const Footer = ({ setActiveSection }: any) => {
                             </a>
                         </div>
                     </div>
+
+                    {/* Quick Links */}
                     <div>
                         <h4 className="text-xl font-bold mb-6 text-white">Menu Utama</h4>
                         <ul className="space-y-3">
@@ -151,6 +181,8 @@ const Footer = ({ setActiveSection }: any) => {
                             ))}
                         </ul>
                     </div>
+
+                    {/* Contact Info */}
                     <div>
                         <h4 className="text-xl font-bold mb-6 text-white">Hubungi Kami</h4>
                         <div className="space-y-4">
@@ -176,8 +208,36 @@ const Footer = ({ setActiveSection }: any) => {
                             </div>
                         </div>
                     </div>
+
+                    {/* Opening Hours */}
+                    {/* <div> */}
+                        {/* <h4 className="text-xl font-bold mb-6 text-white">Jam Buka</h4>
+                        <div className="space-y-3">
+                            <div className="flex items-center space-x-3">
+                                <Clock className="h-5 w-5 text-white flex-shrink-0" />
+                                <div className="text-gray-300 text-sm">
+                                    <p className="font-semibold text-white">Selasa - Jumat</p>
+                                    <p>13:30 - 22:00</p>
+                                </div>
+                            </div>
+                            <div className="text-gray-300 text-sm ml-8">
+                                <p className="font-semibold text-white">Selasa - Minggu</p>
+                                <p>10:00 - 22:00</p>
+                            </div>
+                        </div> */}
+                        
+                        {/* Special Notice */}
+                        {/* <div className="mt-6 p-4 bg-white/10 rounded-lg border border-white/20 backdrop-blur-sm">
+                            <p className="text-white text-sm font-medium">
+                                ☕ Happy Hour: 15:00-17:00<br />
+                                <span className="text-gray-300">Diskon 20% untuk semua minuman!</span>
+                            </p>
+                        </div> */}
+                    {/* </div> */}
                 </div>
             </div>
+
+            {/* Bottom Bar */}
             <div className="border-t border-gray-700 bg-gray-900">
                 <div className="container mx-auto px-6 py-6">
                     <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
@@ -201,16 +261,24 @@ const Footer = ({ setActiveSection }: any) => {
     );
 };
 
+// =================================================================================
+// KOMPONEN MENU BARU (MENGGANTIKAN MenuViewer LAMA)
+// =================================================================================
 const MenuViewer = ({ menuPdfUrl }: { menuPdfUrl: string | null }) => {
     const [isLoading, setIsLoading] = useState(true);
+
+    // Buat URL untuk Google Drive Viewer jika menuPdfUrl ada
     const googleViewerUrl = menuPdfUrl
         ? `https://docs.google.com/gview?url=${encodeURIComponent(menuPdfUrl)}&embedded=true`
         : '';
+
     const handleIframeLoad = () => {
         setIsLoading(false);
     };
+
     return (
         <div>
+            {/* Hero Section */}
             <div className="bg-black text-white py-19">
                 <div className="container mx-auto px-6 text-center">
                     <div className="flex items-center justify-center mb-4">
@@ -220,6 +288,7 @@ const MenuViewer = ({ menuPdfUrl }: { menuPdfUrl: string | null }) => {
                     <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8">
                         Jelajahi koleksi lengkap hidangan dan minuman berkualitas tinggi yang telah kami siapkan khusus untuk Anda
                     </p>
+                    {/* UBAH: Tampilkan tombol hanya jika URL ada */}
                     {menuPdfUrl ? (
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <a href={menuPdfUrl} download="paddies-menu.pdf" className="bg-white hover:bg-gray-200 text-black px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center transform hover:scale-105">
@@ -236,19 +305,24 @@ const MenuViewer = ({ menuPdfUrl }: { menuPdfUrl: string | null }) => {
                     )}
                 </div>
             </div>
+
+            {/* PDF Viewer Section */}
             <div className="py-16 bg-white">
                 <div className="container mx-auto px-6">
+                    {/* UBAH: Render kondisional berdasarkan menuPdfUrl */}
                     {menuPdfUrl ? (
                         <div className="max-w-4xl mx-auto bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
-                            <div className="px-5 py-4 border-b border-gray-700 flex items-center justify-between bg-gray-900">
+                            {/* ... (Header Bingkai Anda, tidak berubah) ... */}
+                             <div className="px-5 py-4 border-b border-gray-700 flex items-center justify-between bg-gray-900">
                                 <div className="flex items-center space-x-2">
                                     <div className="w-3 h-3 bg-gray-700 rounded-full"></div>
                                     <div className="w-3 h-3 bg-gray-700 rounded-full"></div>
                                     <div className="w-3 h-3 bg-gray-700 rounded-full"></div>
                                 </div>
                                 <p className="text-sm font-medium text-gray-400">Paddies Cafe - Digital Menu</p>
-                                <div className="w-12"></div>
+                                <div className="w-12"></div> {/* Spacer */}
                             </div>
+
                             <div className="relative">
                                 {isLoading && (
                                     <div className="absolute inset-0 bg-gray-900/80 backdrop-blur-sm flex items-center justify-center z-10">
@@ -259,12 +333,12 @@ const MenuViewer = ({ menuPdfUrl }: { menuPdfUrl: string | null }) => {
                                     </div>
                                 )}
                                 <div className="w-full aspect-[8.5/11] bg-gray-800">
-                                    <iframe
-                                        src={googleViewerUrl}
-                                        title="Menu Paddies Cafe"
-                                        className="w-full h-full border-none"
-                                        onLoad={handleIframeLoad}
-                                    />
+                            <iframe
+                                src={menuPdfUrl}
+                                title="Menu Paddies Cafe"
+                                className="w-full h-full border-none"
+                                onLoad={handleIframeLoad}
+                            />
                                 </div>
                             </div>
                         </div>
@@ -281,6 +355,8 @@ const MenuViewer = ({ menuPdfUrl }: { menuPdfUrl: string | null }) => {
                             </div>
                         </div>
                     )}
+
+                    {/* UBAH: Tampilkan opsi alternatif hanya jika URL ada */}
                     {menuPdfUrl && (
                         <div className="mt-8 text-center">
                             <p className="text-gray-500 text-sm mb-4">
@@ -304,6 +380,10 @@ const MenuViewer = ({ menuPdfUrl }: { menuPdfUrl: string | null }) => {
     );
 };
 
+// =================================================================================
+// KOMPONEN UTAMA CAFEWEBSITE
+// =================================================================================
+
 interface Slider {
   id: number;
   title: string;
@@ -312,6 +392,7 @@ interface Slider {
   order: number;
 }
 
+// Definisikan interface untuk Testimonial
 interface Testimonial {
     id: number;
     name: string;
@@ -319,6 +400,11 @@ interface Testimonial {
     content: string;
     rating: number;
     avatar?: string;
+}
+
+interface FeaturedProductData {
+    id: number;
+    product: Product; // Kita bisa gunakan lagi interface Product yang sudah ada
 }
 
 interface ProductCategory {
@@ -332,7 +418,7 @@ interface Product {
   description: string;
   price: number;
   category: ProductCategory;
-  is_featured: boolean;
+  is_featured: boolean; // <-- TAMBAHKAN INI
   image_path?: string;
   delivery_link_1?: string;
   delivery_link_2?: string;
@@ -345,12 +431,21 @@ interface CafeWebsiteProps {
   categories?: ProductCategory[];
   menuPdfUrl: string | null;
   testimonials: Testimonial[];
-  featuredProducts: any[];
+  featuredProducts: FeaturedProductData[]; // <-- TAMBAHKAN PROPS BARU
 }
+
+// const [isMapLoading, setIsMapLoading] = useState(true);
+
+// const googleMapsUrl = "https://www.google.com/maps/place/Paddies.Cafe/@-6.9939763,107.807694,17z/data=!4m15!1m8!3m7!1s0x2e68c5c6ea4e2d63:0xc071a0b3d3e549f0!2sPaddies.Cafe!8m2!3d-6.9939816!4d107.8102689!10e1!16s%2Fg%2F11t4kzfz_1!3m5!1s0x2e68c5c6ea4e2d63:0xc071a0b3d3e549f0!8m2!3d-6.9939816!4d107.8102689!16s%2Fg%2F11t4kzfz_1?entry=ttu&g_ep=EgoyMDI1MDgxOS4wIKXMDSoASAFQAw%3D%3D";
+
+// const handleMapLoad = () => {
+//     setIsMapLoading(false);
+// };
 
 const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categories = [], menuPdfUrl, testimonials, featuredProducts }) => {
   const [activeSection, setActiveSection] = useState('home');
   const [selectedCategory, setSelectedCategory] = useState('all');
+
   const formatRupiah = (price: number) => {
     return new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -358,9 +453,11 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
       minimumFractionDigits: 0
     }).format(price);
   };
+
   const filteredProducts = selectedCategory === 'all' 
     ? products 
     : products.filter(product => product.category.id.toString() === selectedCategory);
+
   const getDeliveryButton = (link: string | null | undefined, name: string, bgClass: string) => {
     if (!link) return null;
     return (
@@ -375,17 +472,22 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
     );
   };
 
-  type PageContainerProps = {
-    children: ReactNode;
-  };
-  const PageContainer: React.FC<PageContainerProps> = ({ children }) => (
-        <div className="pt-20">{children}</div>
-  );
+type PageContainerProps = {
+  children: ReactNode;
+};
 
-  const renderHome = () => {
+const PageContainer: React.FC<PageContainerProps> = ({ children }) => (
+        <div className="pt-20">{children}</div> // pt-20 untuk memberi ruang di bawah navbar fixed
+);
+
+const renderHome = () => {
+    // --- PERUBAHAN 1: Tentukan ID produk unggulan di sini ---
+    // Ganti angka [1, 3, 5] dengan ID produk yang ingin Anda tampilkan.
+    // const featuredProductIds = [2, 4]; 
+
     return (
         <div className="space-y-20 pt-20"> 
-            <div className="relative w-full -mt-7 overflow-hidden">
+            <div className="relative w-full -mt-7 overflow-hidden"> {/* -mt-20 untuk meniadakan padding top pada elemen pertama */}
                 <Swiper
                     modules={[SwiperNavigation, Pagination, Autoplay, EffectFade]}
                     spaceBetween={0}
@@ -412,11 +514,13 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                             <div className="absolute inset-0 flex items-center justify-center text-white">
                                 <div className="text-center max-w-4xl px-6">
                                     <div className="flex items-center justify-center mb-4">
+                                        {/* Ganti div di atas dengan tag img di bawah ini */}
                                         <img 
                                             src="/paddies-logo-transparant.png" 
                                             alt="Logo Paddies Cafe" 
                                             className="h-26 md:h-36 mb-4" 
                                         />
+                                        {/* <h1 className="text-5xl md:text-7xl font-bold">Paddies Cafe</h1> */}
                                     </div>
                                     <p className="text-xl md:text-2xl mb-4 text-gray-200">
                                         Tempat terbaik untuk menikmati kopi dengan suasana yang nyaman.
@@ -439,22 +543,32 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                         </SwiperSlide>
                     ))}
                 </Swiper>
+                
 <style>{`
+    /* === Hero Slider Styles === */
     .custom-swiper .swiper-button-next, .custom-swiper .swiper-button-prev { background-color: rgba(0, 0, 0, 0.5); border-radius: 50%; width: 44px; height: 44px; color: #ffffff; transition: background-color 0.3s ease; }
     .custom-swiper .swiper-button-next:hover, .custom-swiper .swiper-button-prev:hover { background-color: #000000; }
     .custom-swiper .swiper-button-next::after, .custom-swiper .swiper-button-prev::after { font-size: 20px; }
     .custom-swiper .swiper-pagination-bullet { background-color: #ffffff; opacity: 0.7; }
     .custom-swiper .swiper-pagination-bullet-active { background-color: #ffffff; opacity: 1; }
+
+    /* === Marquee Animation Styles === */
     @keyframes marquee {
       0% { transform: translateX(0%); }
+      /* Geser sejauh 50% karena kita punya 2 set konten */
       100% { transform: translateX(-50%); } 
     }
+
     .animate-marquee {
+      /* Durasi bisa disesuaikan, semakin besar semakin lambat */
       animation: marquee 10s linear infinite;
     }
+    
     .group-hover\\:pause:hover {
       animation-play-state: paused;
     }
+
+    /* Opsi untuk pengguna yang tidak ingin ada gerakan */
     @media (prefers-reduced-motion: reduce) {
       .animate-marquee {
         animation: none;
@@ -462,6 +576,7 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
     }
 `}</style>
             </div>
+
             <div className="container mx-auto px-4">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Fasilitas Kami</h2>
@@ -484,6 +599,7 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                     ))}
                 </div>
             </div>
+
             <div className="bg-black text-white py-16">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -502,13 +618,15 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                     </div>
                 </div>
             </div>
+
             <div className="container mx-auto px-4">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Menu Unggulan</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">Cicipi menu-menu favorit pilihan pelanggan kami</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {featuredProducts.map(({ product }) => (
+        {/* --- GANTI LOGIKA LOOPING DI SINI --- */}
+        {featuredProducts.map(({ product }) => ( // Destructuring untuk langsung dapat object product
             <div key={product.id} className="bg-white rounded-lg shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
                 <div className="h-48 bg-gray-200 flex items-center justify-center">
                     {product.image_path ? (
@@ -524,12 +642,14 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                     <p className="text-gray-600 text-sm mb-4">{product.description}</p>
                     <div className="flex justify-between items-center">
                         <span className="text-2xl font-bold text-black">{formatRupiah(product.price)}</span>
+                        {/* ... (bintang rating jika ada) ... */}
                     </div>
                 </div>
             </div>
         ))}
                 </div>
             </div>
+
 <div className="py-20 bg-gray-50"> 
     <div className="container mx-auto px-6">
         <div className="text-center mb-12">
@@ -537,15 +657,20 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">Testimoni dari pelanggan setia Paddies Cafe</p>
         </div>
     </div>
+
     <div className="relative group w-full overflow-hidden">
+        {/* Gradient overlays for smooth fade effect */}
         <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none md:w-32"></div>
         <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none md:w-32"></div>
+        
         <div className="flex animate-marquee group-hover:pause cursor-pointer">
+            {/* Set Testimoni Pertama */}
             {testimonials.map((testimonial) => (
               <div 
                 key={`orig-${testimonial.id}`}
                 className="flex-shrink-0 w-[80vw] sm:w-[45vw] md:w-80 mx-4 bg-white p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300"
               >
+                {/* ... Konten kartu testimoni (tidak ada perubahan di sini) ... */}
                 <Quote className="h-6 w-6 text-black mb-3" />
                 <p className="text-gray-600 mb-4 italic text-sm leading-relaxed h-24 overflow-auto">
                   "{testimonial.content}"
@@ -575,12 +700,15 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                 </div>
               </div>
             ))}
+
+            {/* Set Testimoni Kedua (Duplikat untuk efek loop) */}
             {testimonials.map((testimonial) => (
               <div 
                 key={`copy-${testimonial.id}`}
                 aria-hidden="true"
                 className="flex-shrink-0 w-[80vw] sm:w-[45vw] md:w-80 mx-4 bg-white p-6 rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300"
               >
+                 {/* ... Konten kartu testimoni (tidak ada perubahan di sini) ... */}
                  <Quote className="h-6 w-6 text-black mb-3" />
                 <p className="text-gray-600 mb-4 italic text-sm leading-relaxed h-24 overflow-auto">
                   "{testimonial.content}"
@@ -613,6 +741,7 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
         </div>
     </div>
 </div>
+            {/* About Section */}
             <div className="py-20 bg-black text-white mt-0">
                 <div className="container mx-auto px-6">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -662,10 +791,12 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
     </div>
   );
 }  
-
   const renderMenu = () => <PageContainer><MenuViewer menuPdfUrl={menuPdfUrl} /></PageContainer>;
+
   const renderShop = () => (
     <PageContainer>
+
+            {/* Hero Section */}
             <div className="bg-black text-white py-19 w-full">
                 <div className="container mx-auto px-6 text-center">
                     <div className="flex items-center justify-center mb-4">
@@ -681,6 +812,7 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                     </div>
                 </div>
             </div>
+
       <div className="container mx-auto px-4 py-16">
         <div className="mb-12">
           <div className="flex items-center justify-center mb-6">
@@ -770,8 +902,10 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
       </div>
     </PageContainer>
   );
+
   const renderLocation = () => (
     <PageContainer>
+            {/* Hero Section */}
             <div className="bg-black text-white py-16 mb-16">
                 <div className="container mx-auto px-6 text-center">
                     <div className="flex items-center justify-center mb-4">
@@ -787,6 +921,7 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                     </div>
                 </div>
             </div>
+
       <div className="container mx-auto mb-16">        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div className="order-2 lg:order-1">
@@ -798,6 +933,7 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                                             </h2>
                                             <p className="text-gray-600 mt-1">Temukan rute terbaik menuju cafe kami</p>
                                         </div>
+            
             <div className="bg-gray-200 h-96 rounded-lg overflow-hidden shadow-lg">
                 <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.1299176858915!2d107.80769397403675!3d-6.993976268494977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68c5c6ea4e2d63%3A0xc071a0b3d3e549f0!2sPaddies.Cafe!5e0!3m2!1sid!2sid!4v1757185213228!5m2!1sid!2sid" 
@@ -832,6 +968,18 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                 </div>
               </div>
             </div>
+            {/* <div className="bg-white p-6 rounded-lg shadow-lg">
+              <div className="flex items-start mb-4">
+                <Clock className="h-6 w-6 text-black mt-1 mr-3 flex-shrink-0" />
+                <div>
+                  <h3 className="font-bold text-black text-lg mb-2">Jam Operasional</h3>
+                  <div className="space-y-2 text-gray-600">
+                    <div className="flex justify-between"><span>Selasa - Jumat</span><span className="font-medium">13:30 - 22:00</span></div>
+                    <div className="flex justify-between"><span>Selasa - Minggu</span><span className="font-medium">10:00 - 22:00</span></div>
+                  </div>
+                </div>
+              </div>
+            </div> */}
             <div className="bg-black text-white p-6 rounded-lg">
               <h3 className="font-bold text-lg mb-4">Informasi Tambahan</h3>
               <ul className="space-y-2 text-gray-300">
@@ -843,8 +991,10 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
       </div>
     </PageContainer>
   );
+
   const renderReservasi = () => (
     <PageContainer>
+            {/* Hero Section */}
             <div className="bg-black text-white py-19">
                 <div className="container mx-auto px-6 text-center">
                     <div className="flex items-center justify-center mb-4">
@@ -856,9 +1006,15 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
                     </p>
                 </div>
             </div>
+
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+            {/* <div className="bg-black text-white p-8 text-center">
+              <CalendarCheck className="h-16 w-16 mx-auto mb-4" />
+              <h3 className="text-2xl font-bold mb-2">Reservasi Mudah & Cepat</h3>
+              <p className="text-gray-300">Tim kami siap membantu Anda untuk reservasi yang sempurna</p>
+            </div> */}
             <div className="p-8 bg-black text-white">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-6">
@@ -910,6 +1066,7 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
       </div>
     </PageContainer>
   );
+
   return (
         <div className="min-h-screen bg-white flex flex-col flex h-full flex-1 overflow-x-auto">
             <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
@@ -924,4 +1081,5 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categ
         </div>
   );
 };
+
 export default CafeWebsite;
