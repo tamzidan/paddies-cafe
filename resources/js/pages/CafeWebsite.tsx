@@ -204,7 +204,7 @@ const Footer = ({ setActiveSection }: any) => {
 const MenuViewer = ({ menuPdfUrl }: { menuPdfUrl: string | null }) => {
     const [isLoading, setIsLoading] = useState(true);
     const googleViewerUrl = menuPdfUrl
-        ? `https://docs.google.com/gview?url=${encodeURIComponent(menuPdfUrl)}&embedded=true`
+        ? `https://docs.google.com/gview?url=https://paddiescafe.com${encodeURIComponent(menuPdfUrl)}&embedded=true`
         : '';
     const handleIframeLoad = () => {
         setIsLoading(false);
