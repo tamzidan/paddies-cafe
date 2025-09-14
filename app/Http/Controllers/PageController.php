@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\FeaturedProduct;
+use App\Models\Gallery;
 use App\Models\MenuPdf;
-use App\Models\Product;
 // Tambahkan import model di atas
+use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Slider; // <--- Impor model Slider kita
 use App\Models\Testimonial; // <-- Tambahkan ini di atas
@@ -42,6 +43,9 @@ class PageController extends Controller
         $featuredProducts = FeaturedProduct::with('product.category') // Eager load product & category-nya
                                       ->orderBy('order')
                                       ->get();
+        // --- TAMBAHKAN ATAU PASTIKAN BARIS INI ADA ---
+        $galleries = Gallery::orderBy('order')->get();
+        // ---------------------------------------------
 
         return Inertia::render('CafeWebsite', [
             'sliders' => $sliders,
@@ -50,6 +54,7 @@ class PageController extends Controller
             'menuPdfUrl' => $activeMenu ? $activeMenu->url : null,
             'testimonials' => $testimonials,
             'featuredProducts' => $featuredProducts, // <-- KIRIM SEBAGAI PROP
+            'galleries' => $galleries, // <-- PASTIKAN ANDA MENGIRIM PROP INI
         ]);
     }
 

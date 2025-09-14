@@ -52,6 +52,7 @@ Route::prefix('admin')
 
         // ---------------------
 
+        Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class)->except(['show']);
 });
 
 require __DIR__.'/settings.php';
