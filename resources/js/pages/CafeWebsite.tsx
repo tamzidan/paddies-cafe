@@ -423,6 +423,14 @@ interface Gallery {
     caption: string | null;
 }
 
+// TAMBAHKAN INTERFACE BARU DI SINI
+interface OperationalHour {
+    id: number;
+    day: string;
+    hours: string;
+    is_open: boolean;
+}
+
 // Definisikan tipe untuk settings
 interface ReservationSettings {
     reservasi_title?: string;
@@ -447,6 +455,7 @@ interface CafeWebsiteProps {
     featuredProducts: any[];
     galleries: Gallery[]; 
     reservationSettings: ReservationSettings; // <-- TAMBAHKAN INI
+    operationalHours: OperationalHour[]; // <-- TAMBAHKAN INI
 }
 
 // ==========================================================
@@ -454,8 +463,15 @@ interface CafeWebsiteProps {
 // ==========================================================
 const HomeSection = ({ sliders, operationalHours, featuredProducts, testimonials, setActiveSection, formatRupiah }: any) => {
 
+    // Dapatkan hari saat ini (0 = Minggu, 1 = Senin, ..., 6 = Sabtu)
+    const todayIndex = new Date().getDay();
+
+    // Map nama hari dari Javascript ke data Anda
+    const dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    const todayName = dayNames[todayIndex];
+
     return (
-        <div className="space-y-20 pt-20"> 
+        <div className="space-y-0 pt-0"> 
             <div className="relative w-full -mt-7 overflow-hidden">
                 <Swiper
                     modules={[SwiperNavigation, Pagination, Autoplay, EffectFade]}
@@ -524,7 +540,91 @@ const HomeSection = ({ sliders, operationalHours, featuredProducts, testimonials
                 `}</style>
             </div>
 
-            <div className="container mx-auto px-4">
+{/* ================================================ */}
+{/* IMPROVED OPERATIONAL HOURS SECTION */}
+{/* ================================================ */}
+{operationalHours && operationalHours.length > 0 && (
+    <div className="py-20 bg-black">
+        <div className="container mx-auto px-6">
+            <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    Jam Operasional
+                </h2>
+                <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Kami siap melayani Anda setiap hari dengan sepenuh hati.
+                </p>
+            </div>
+            
+            {/* Responsive grid with better breakpoints */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                {operationalHours.map((item) => {
+                    const isToday = item.day.toLowerCase() === todayName.toLowerCase();
+                    return (
+                        <div
+                            key={item.id}
+                            className={`
+                                relative p-6 rounded-2xl transition-all duration-300 transform 
+                                hover:-translate-y-2 hover:shadow-2xl flex flex-col text-center
+                                min-h-[160px] group cursor-default
+                                ${isToday 
+                                    ? 'bg-white text-black shadow-xl scale-105 border-2 border-white' 
+                                    : 'bg-gray-900 border border-gray-700 text-white hover:border-gray-600'
+                                }
+                            `}
+                        >
+                            {/* Today indicator */}
+                            {isToday && (
+                                <div className="absolute -top-2 -right-2 bg-black text-white text-xs px-3 py-1 rounded-full font-semibold">
+                                    Hari Ini
+                                </div>
+                            )}
+                            
+                            <h3 className="font-bold text-xl mb-3 tracking-wide">
+                                {item.day}
+                            </h3>
+                            
+                            <p className={`text-lg mb-6 flex-grow font-medium ${
+                                isToday ? 'text-gray-700' : 'text-gray-300'
+                            }`}>
+                                {item.hours}
+                            </p>
+                            
+                            {/* Status indicator with better styling */}
+                            <div className="flex items-center justify-center space-x-2 mt-auto">
+                                <div className={`
+                                    w-3 h-3 rounded-full transition-all duration-300 
+                                    ${item.is_open 
+                                        ? (isToday ? 'bg-black animate-pulse' : 'bg-white') 
+                                        : 'bg-gray-500'
+                                    }
+                                `}></div>
+                                <span className={`
+                                    text-sm font-semibold transition-colors duration-300
+                                    ${item.is_open 
+                                        ? (isToday ? 'text-black' : 'text-white') 
+                                        : 'text-gray-500'
+                                    }
+                                `}>
+                                    {item.is_open ? 'Buka' : 'Tutup'}
+                                </span>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+            
+            {/* Additional info */}
+            <div className="text-center mt-12">
+                <p className="text-gray-400 text-sm">
+                    * Jam operasional dapat berubah pada hari libur nasional
+                </p>
+            </div>
+        </div>
+    </div>
+)}            
+
+
+            <div className="container py-20 mx-auto px-4">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Fasilitas Kami</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">Nikmati berbagai fasilitas yang kami sediakan untuk kenyamanan Anda</p>
@@ -547,7 +647,7 @@ const HomeSection = ({ sliders, operationalHours, featuredProducts, testimonials
                 </div>
             </div>
             
-            <div className="bg-black text-white py-16">
+            <div className="bg-black text-white py-26">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     {[
@@ -565,7 +665,7 @@ const HomeSection = ({ sliders, operationalHours, featuredProducts, testimonials
                     </div>
                 </div>
             </div>
-            <div className="container mx-auto px-4">
+            <div className="container py-20 my-10 mx-auto px-4">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Menu Unggulan</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto">Cicipi menu-menu favorit pilihan pelanggan kami</p>
@@ -708,7 +808,7 @@ const HomeSection = ({ sliders, operationalHours, featuredProducts, testimonials
 // ==========================================================
 // LANGKAH 2: Komponen CafeWebsite utama yang sudah diperbarui
 // ==========================================================
-const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categories = [], menuPdfUrl, testimonials, featuredProducts, galleries = [], reservationSettings = {}  }) => {
+const CafeWebsite: React.FC<CafeWebsiteProps> = ({ sliders, products = [], categories = [], menuPdfUrl, testimonials, featuredProducts, galleries = [], reservationSettings = {},     operationalHours = [] }) => {
 
     const [activeSection, setActiveSection] = useState('home');
     const [selectedCategory, setSelectedCategory] = useState('all');
@@ -1098,6 +1198,7 @@ const renderGallery = () => (
                 {activeSection === 'home' && (
                     <HomeSection 
                         sliders={sliders}
+                        operationalHours={operationalHours} // <-- KIRIM PROP KE BAWAH
                         featuredProducts={featuredProducts}
                         testimonials={testimonials}
                         setActiveSection={setActiveSection}

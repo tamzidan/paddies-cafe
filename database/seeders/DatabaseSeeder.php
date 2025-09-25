@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             ProductCategorySeeder::class,
             ProductSeeder::class,
             AdminUserSeeder::class,
+            OperationalHourSeeder::class,
         ]);
 
         // User::factory(10)->create();

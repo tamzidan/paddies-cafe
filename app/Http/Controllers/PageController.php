@@ -49,6 +49,13 @@ class PageController extends Controller
         $galleries = Gallery::orderBy('order')->get();
         // ---------------------------------------------
 
+        $operationalHours = OperationalHour::orderBy('sort_order')->get();
+
+        // Ambil data lain yang sudah ada sebelumnya
+        $sliders = \App\Models\Slider::orderBy('order')->get();
+        $testimonials = \App\Models\Testimonial::all();
+
+
         // --- TAMBAHKAN KODE INI ---
         $reservationKeys = [
             'reservasi_title', 'reservasi_subtitle',
@@ -72,6 +79,7 @@ class PageController extends Controller
             'featuredProducts' => $featuredProducts, // <-- KIRIM SEBAGAI PROP
             'galleries' => $galleries, // <-- PASTIKAN ANDA MENGIRIM PROP INI
             'reservationSettings' => $reservationSettings, // <-- KIRIM SEBAGAI PROP
+            'operationalHours' => $operationalHours, // <-- KIRIM DATA KE FRONTEND
         ]);
     }
 
