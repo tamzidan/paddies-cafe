@@ -1,4 +1,6 @@
-import React, { useState, ReactNode, useMemo, useEffect } from 'react';
+
+import React, { useState, ReactNode, useMemo } from 'react';
+import AppLogoIcon from '../components/app-logo-icon';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // MODIFIKASI: freeMode tidak lagi digunakan untuk efek ini, jadi bisa dihapus jika tidak dipakai di tempat lain.
 import { Navigation as SwiperNavigation, Pagination, Autoplay, EffectFade, FreeMode } from 'swiper/modules';
@@ -35,10 +37,11 @@ const Navbar = ({ activeSection, setActiveSection }: any) => {
     return (
         <nav className="bg-white shadow-lg fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 cursor-pointer transition-all duration-300 transform hover:scale-105">
+                        <AppLogoIcon className="fill-current text-white dark:text-white rounded-full size-10 shadow-md" />
                     <button
                         onClick={() => handleNavClick('home')}
-                        className="font-bold text-2xl text-black hover:text-gray-700 transition-colors duration-300"
+                        className="font-bold text-2xl text-black cursor-pointer"
                     >
                         Paddies Cafe
                     </button>
@@ -450,35 +453,6 @@ interface CafeWebsiteProps {
 // LANGKAH 1: Komponen HomeSection yang baru dipisahkan
 // ==========================================================
 const HomeSection = ({ sliders, operationalHours, featuredProducts, testimonials, setActiveSection, formatRupiah }: any) => {
-
-    // const [isOpen, setIsOpen] = useState(false);
-    // const [today, setToday] = useState('');
-
-//     useEffect(() => {
-//         const checkOpeningStatus = () => {
-//             if (!operationalHours || operationalHours.length === 0) return;
-//             const now = new Date();
-//             const dayOfWeekJS = now.getDay();
-//             const dayOfWeekDB = dayOfWeekJS === 0 ? 7 : dayOfWeekJS;
-//             const currentTime = now.getHours() + ':' + ('0' + now.getMinutes()).slice(-2);
-//             const currentDaySchedule = operationalHours.find((h: OperationalHour) => h.day_of_week === dayOfWeekDB)
-// ;
-            
-//             if (currentDaySchedule) {
-//                 setToday(currentDaySchedule.day_name);
-//                 if (currentDaySchedule.is_closed || !currentDaySchedule.open_time || !currentDaySchedule.close_time) {
-//                     setIsOpen(false);
-//                 } else {
-//                     if (currentTime >= currentDaySchedule.open_time && currentTime < currentDaySchedule.close_time) {
-//                         setIsOpen(true);
-//                     } else {
-//                         setIsOpen(false);
-//                     }
-//                 }
-//             }
-//         };
-//         checkOpeningStatus();
-//     }, [operationalHours]);
 
     return (
         <div className="space-y-20 pt-20"> 

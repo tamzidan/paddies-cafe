@@ -63,12 +63,12 @@ const mainNavItems: NavItem[] = [
 const footerNavItems: NavItem[] = [
     {
         title: 'Repository',
-        href: 'https://github.com/tamzidan/meracik-coffee.git',
+        href: 'https://github.com/tamzidan/paddies-cafe.git',
         icon: Folder,
     },
     {
         title: 'Documentation',
-        href: 'https://github.com/tamzidan/meracik-coffee/tree/main/documentation',
+        href: 'https://github.com/tamzidan/paddies-cafe/documentation',
         icon: BookOpen,
     },
 ];
@@ -83,9 +83,6 @@ export function AppSidebar() {
                             <Link href="/admin/dashboard" prefetch>
                                 <AppLogo />
                             </Link>
-                            {/* <Link href="/dashboard" prefetch>
-                                <AppLogo />
-                            </Link> */}
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
