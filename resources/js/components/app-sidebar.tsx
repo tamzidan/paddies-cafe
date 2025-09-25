@@ -4,46 +4,60 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, LayoutDashboard, Images, FolderTree, Package, FileText, MessageSquareQuote, Star, Clock, CalendarDays } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: '/admin/dashboard',
-        icon: LayoutGrid,
+        icon: LayoutDashboard,
     },
     {
         title: 'Manajemen Slider',
         href: '/admin/sliders',
-        icon: LayoutGrid,
+        icon: Images,
     },
     {
         title: 'Manajemen Category Products',
         href: '/admin/product-categories',
-        icon: LayoutGrid,
+        icon: FolderTree,
     },
     {
         title: 'Manajemen Produk',
         href: '/admin/products',
-        icon: LayoutGrid,
+        icon: Package,
     },
     {
         title: 'Manajemen Menu',
         href: '/admin/menu-pdfs',
-        icon: LayoutGrid,
+        icon: FileText,
     },
     {
         title: 'Manajemen Testimonials',
         href: '/admin/testimonials',
-        icon: LayoutGrid,
+        icon: MessageSquareQuote,
     },
     {
         title: 'Manajemen Menu Unggulan',
         href: '/admin/featured-products',
-        icon: LayoutGrid,
+        icon: Star,
     },
-
+    {
+        title: 'Manajemen Gallery',
+        href: '/admin/galleries',
+        icon: Images,
+    },
+    {
+        title: 'Manajemen Jam Oprasional',
+        href: '/admin/operational-hours',
+        icon: Clock,
+    },
+    {
+        title: 'Manajemen Reservasi',
+        href: '/admin/reservation-settings',
+        icon: CalendarDays,
+    },
 ];
 
 const footerNavItems: NavItem[] = [

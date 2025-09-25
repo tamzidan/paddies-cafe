@@ -30,29 +30,28 @@ Route::prefix('admin')
 
         // Route untuk admin dashboard
         Route::get('/dashboard', [\App\Http\Controllers\Admin\AdminController::class, 'dashboard'])->name('dashboard');
+
         Route::resource('sliders', \App\Http\Controllers\Admin\SliderController::class)->except(['show']);
+
         Route::resource('product-categories', \App\Http\Controllers\Admin\ProductCategoryController::class)->except(['show']);
+
         Route::resource('products', \App\Http\Controllers\Admin\ProductController::class)->except(['show']);
-        // --- TAMBAHKAN INI ---
         Route::put('products/{product}/toggle-featured', [\App\Http\Controllers\Admin\ProductController::class, 'toggleFeatured'])->name('products.toggleFeatured');
-        // ---------------------
-        // --- TAMBAHKAN INI ---
-    Route::resource('menu-pdfs', App\Http\Controllers\Admin\MenuPdfController::class)->except(['show']);
-    Route::put('menu-pdfs/{menuPdf}/set-active', [App\Http\Controllers\Admin\MenuPdfController::class, 'setActive'])->name('menu-pdfs.setActive');
-    // ---------------------
 
-    // --- TAMBAHKAN INI ---
-    Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class)->except(['show']);
-    Route::put('testimonials/{testimonial}/toggle-active', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleActive'])->name('testimonials.toggleActive');
-    // ---------------------
+        Route::resource('menu-pdfs', App\Http\Controllers\Admin\MenuPdfController::class)->except(['show']);
+        Route::put('menu-pdfs/{menuPdf}/set-active', [App\Http\Controllers\Admin\MenuPdfController::class, 'setActive'])->name('menu-pdfs.setActive');
 
-        // --- TAMBAHKAN INI ---
+        Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class)->except(['show']);
+        Route::put('testimonials/{testimonial}/toggle-active', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleActive'])->name('testimonials.toggleActive');
+
         Route::resource('featured-products', \App\Http\Controllers\Admin\FeaturedProductController::class)->except(['show']);
         Route::put('testimonials/{testimonial}/toggle-active', [\App\Http\Controllers\Admin\TestimonialController::class, 'toggleActive'])->name('testimonials.toggleActive');
 
-        // ---------------------
-
         Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class)->except(['show']);
+
+        Route::get('reservation-settings', [\App\Http\Controllers\Admin\ReservationSettingController::class, 'index'])->name('reservation-settings.index');
+        Route::put('reservation-settings', [\App\Http\Controllers\Admin\ReservationSettingController::class, 'update'])->name('reservation-settings.update');
+
 });
 
 require __DIR__.'/settings.php';

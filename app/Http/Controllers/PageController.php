@@ -7,6 +7,8 @@ use App\Models\Gallery;
 use App\Models\MenuPdf;
 // Tambahkan import model di atas
 use App\Models\Product;
+use App\Models\Setting;
+use App\Models\OperationalHour;
 use App\Models\ProductCategory;
 use App\Models\Slider; // <--- Impor model Slider kita
 use App\Models\Testimonial; // <-- Tambahkan ini di atas
@@ -47,6 +49,20 @@ class PageController extends Controller
         $galleries = Gallery::orderBy('order')->get();
         // ---------------------------------------------
 
+        // --- TAMBAHKAN KODE INI ---
+        $reservationKeys = [
+            'reservasi_title', 'reservasi_subtitle',
+            'reservasi_wa_number', 'reservasi_wa_text',
+            'reservasi_phone_number',
+            'reservasi_email',
+            'reservasi_ig_username', 'reservasi_ig_link',
+            'reservasi_tiktok_name', 'reservasi_tiktok_link',
+            'reservasi_tips'
+        ];
+        $reservationSettings = Setting::whereIn('key', $reservationKeys)->pluck('value', 'key');
+        // -------------------------
+
+
         return Inertia::render('CafeWebsite', [
             'sliders' => $sliders,
             'products' => $products,
@@ -55,6 +71,7 @@ class PageController extends Controller
             'testimonials' => $testimonials,
             'featuredProducts' => $featuredProducts, // <-- KIRIM SEBAGAI PROP
             'galleries' => $galleries, // <-- PASTIKAN ANDA MENGIRIM PROP INI
+            'reservationSettings' => $reservationSettings, // <-- KIRIM SEBAGAI PROP
         ]);
     }
 

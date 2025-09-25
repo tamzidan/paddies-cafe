@@ -98,21 +98,6 @@ export default function ProductIndex() {
                                     <td className="p-4 font-medium">{product.name}</td>
                                     <td className="p-4">{product.category.name}</td>
                                     <td className="p-4">{formatRupiah(product.price)}</td>
-                                    {/* --- TAMBAHKAN KOLOM UNGGULAN --- */}
-                                    <td className="p-4 text-center">
-                                        <Button
-                                            variant={product.is_featured ? 'default' : 'outline'}
-                                            size="icon"
-                                            onClick={() => router.put(route('admin.products.toggleFeatured', product.id), {}, {
-                                                preserveScroll: true, // Agar halaman tidak scroll ke atas
-                                            })}
-                                            title={product.is_featured ? 'Hapus dari Unggulan' : 'Jadikan Unggulan'}
-                                        >
-                                            <StarIcon className={`w-5 h-5 ${product.is_featured ? 'text-yellow-400' : 'text-gray-400'}`} />
-                                        </Button>
-                                    </td>
-                                    {/* ---------------------------------- */}
-
                                     <td className="p-4">
                                         <div className="flex gap-2">
                                             <Button variant="outline" size="icon" asChild>
