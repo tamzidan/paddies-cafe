@@ -68,10 +68,10 @@ export default function TestimonialEdit({ testimonial }: { testimonial: Testimon
                     </div>
 
                     {/* ... (field lainnya, checkbox, dan tombol) ... */}
-                    <div className="flex items-center gap-2">
+                    {/* <div className="flex items-center gap-2">
                         <input type="checkbox" id="is_active" checked={data.is_active} onChange={e => setData('is_active', e.target.checked)} className="h-4 w-4 rounded" />
                         <label htmlFor="is_active" className="text-sm font-medium">Aktifkan Testimoni</label>
-                    </div>
+                    </div> */}
                     <div className="flex justify-end gap-4">
                         <Button variant="ghost" asChild><Link href={route('admin.testimonials.index')}>Batal</Link></Button>
                         <Button type="submit" disabled={processing}>{processing ? 'Menyimpan...' : 'Simpan Perubahan'}</Button>

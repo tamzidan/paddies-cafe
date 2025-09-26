@@ -54,10 +54,10 @@ export default function TestimonialCreate() {
                         <input type="file" onChange={e => setData('avatar', e.target.files ? e.target.files[0] : null)} className="w-full bg-input border-border rounded-md p-2" />
                         {errors.avatar && <div className="text-red-500 text-sm mt-1">{errors.avatar}</div>}
                     </div>
-                    <div className="flex items-center gap-2">
+                    {/* <div className="flex items-center gap-2">
                         <input type="checkbox" id="is_active" checked={data.is_active} onChange={e => setData('is_active', e.target.checked)} className="h-4 w-4 rounded" />
                         <label htmlFor="is_active" className="text-sm font-medium">Aktifkan Testimoni</label>
-                    </div>
+                    </div> */}
                     <div className="flex justify-end gap-4">
                         <Button variant="ghost" asChild><Link href={route('admin.testimonials.index')}>Batal</Link></Button>
                         <Button type="submit" disabled={processing}>{processing ? 'Menyimpan...' : 'Simpan'}</Button>

@@ -40,7 +40,7 @@ class TestimonialController extends Controller
             'content' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
             'avatar' => 'nullable|image|max:1024',
-            'is_active' => 'required|boolean',
+            // 'is_active' => 'required|boolean',
         ]);
 
         $avatarPath = null;
@@ -54,7 +54,7 @@ class TestimonialController extends Controller
             'content' => $request->content,
             'rating' => $request->rating,
             'avatar' => $avatarPath,
-            'is_active' => $request->is_active,
+            // 'is_active' => $request->is_active,
         ]);
 
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial created.');
@@ -91,7 +91,7 @@ class TestimonialController extends Controller
             'content' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
             'avatar' => 'nullable|image|max:1024',
-            'is_active' => 'required|boolean',
+            // 'is_active' => 'required|boolean',
         ]);
 
         $avatarPath = $testimonial->avatar;
@@ -109,7 +109,7 @@ class TestimonialController extends Controller
             'content' => $validated['content'],
             'rating' => $validated['rating'],
             'avatar' => $avatarPath,
-            'is_active' => $validated['is_active'],
+            // 'is_active' => $validated['is_active'],
         ]);
 
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial updated.');
@@ -130,9 +130,9 @@ class TestimonialController extends Controller
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial deleted.');
     }
 
-    public function toggleActive(Testimonial $testimonial)
-    {
-        $testimonial->update(['is_active' => !$testimonial->is_active]);
-        return redirect()->back()->with('success', 'Status testimoni diperbarui.');
-    }
+    // public function toggleActive(Testimonial $testimonial)
+    // {
+    //     $testimonial->update(['is_active' => !$testimonial->is_active]);
+    //     return redirect()->back()->with('success', 'Status testimoni diperbarui.');
+    // }
 }

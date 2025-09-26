@@ -71,7 +71,7 @@ export default function TestimonialIndex() {
                                 <th className="p-4">Nama</th>
                                 <th className="p-4">Jabatan</th>
                                 <th className="p-4 text-center">Rating</th>
-                                <th className="p-4 text-center">Status</th>
+                                {/* <th className="p-4 text-center">Status</th> */}
                                 <th className="p-4">Aksi</th>
                             </tr>
                         </thead>
@@ -84,7 +84,7 @@ export default function TestimonialIndex() {
                                     <td className="p-4 font-medium">{testimonial.name}</td>
                                     <td className="p-4">{testimonial.role}</td>
                                     <td className="p-4 text-center">{testimonial.rating} ★</td>
-                                    <td className="p-4 text-center">
+                                    {/* <td className="p-4 text-center">
                                         <Button
                                             variant={testimonial.is_active ? 'default' : 'outline'}
                                             size="sm"
@@ -93,7 +93,7 @@ export default function TestimonialIndex() {
                                         >
                                             {testimonial.is_active ? <EyeIcon className="w-5 h-5"/> : <EyeSlashIcon className="w-5 h-5"/>}
                                         </Button>
-                                    </td>
+                                    </td> */}
                                     <td className="p-4">
                                         <div className="flex gap-2">
                                             <Button variant="outline" size="icon" asChild>
