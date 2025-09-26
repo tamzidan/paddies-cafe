@@ -86,7 +86,7 @@ export default function ProductEdit({ product, categories }: Props) {
                     {/* Kolom Kanan */}
                     <div className="space-y-4">
                         {/* Harga */}
-                        <div>
+                        {/* <div>
                             <label className="block text-sm font-medium mb-1">Harga</label>
                             <input
                                 type="number"
@@ -95,7 +95,7 @@ export default function ProductEdit({ product, categories }: Props) {
                                 className="w-full bg-input border border-border rounded-md p-2"
                             />
                             {errors.price && <div className="text-red-500 text-sm">{errors.price}</div>}
-                        </div>
+                        </div> */}
 
                         {/* Gambar Produk */}
                         <div>
@@ -118,7 +118,7 @@ export default function ProductEdit({ product, categories }: Props) {
                         </div>
 
                         {/* --- TAMBAHKAN CHECKBOX DI SINI --- */}
-                        <div className="flex items-center gap-2">
+                        {/* <div className="flex items-center gap-2">
                             <input
                                 type="checkbox"
                                 id="is_featured"
@@ -129,7 +129,7 @@ export default function ProductEdit({ product, categories }: Props) {
                             <label htmlFor="is_featured" className="text-sm font-medium">
                                 Jadikan Produk Unggulan
                             </label>
-                        </div>
+                        </div> */}
                         {/* --------------------------------- */}
 
                         {/* Link Delivery */}

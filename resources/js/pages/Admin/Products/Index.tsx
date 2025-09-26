@@ -85,7 +85,7 @@ export default function ProductIndex() {
                                 <th className="p-4">Gambar</th>
                                 <th className="p-4">Nama Produk</th>
                                 <th className="p-4">Kategori</th>
-                                <th className="p-4">Harga</th>
+                                {/* <th className="p-4">Harga</th> */}
                                 <th className="p-4">Aksi</th>
                             </tr>
                         </thead>
@@ -97,7 +97,7 @@ export default function ProductIndex() {
                                     </td>
                                     <td className="p-4 font-medium">{product.name}</td>
                                     <td className="p-4">{product.category.name}</td>
-                                    <td className="p-4">{formatRupiah(product.price)}</td>
+                                    {/* <td className="p-4">{formatRupiah(product.price)}</td> */}
                                     <td className="p-4">
                                         <div className="flex gap-2">
                                             <Button variant="outline" size="icon" asChild>

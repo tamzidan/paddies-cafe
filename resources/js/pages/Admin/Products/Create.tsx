@@ -61,11 +61,11 @@ export default function ProductCreate({ categories }: { categories: Category[] }
 
                     {/* Kolom Kanan */}
                     <div className="space-y-4">
-                        <div>
+                        {/* <div>
                             <label>Harga</label>
                             <input type="number" value={data.price} onChange={e => setData('price', parseInt(e.target.value))} className="w-full bg-input border-border rounded-md p-2" />
                             {errors.price && <div className="text-red-500">{errors.price}</div>}
-                        </div>
+                        </div> */}
                         <div>
                             <label>Gambar Produk</label>
                             <input type="file" onChange={e => setData('image', e.target.files ? e.target.files[0] : null)} className="w-full bg-input border-border rounded-md p-2" />

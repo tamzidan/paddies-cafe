@@ -44,7 +44,7 @@ class ProductController extends Controller
             'product_category_id' => 'required|exists:product_categories,id',
             'description' => 'required|string',
             'price' => 'required|integer|min:0',
-            'is_featured' => 'nullable|boolean', // <-- TAMBAHKAN VALIDASI
+            // 'is_featured' => 'nullable|boolean',
             'image' => 'required|image',
             'delivery_link_1' => 'nullable|url',
             'delivery_link_3' => 'nullable|url',
@@ -58,7 +58,7 @@ class ProductController extends Controller
             'product_category_id' => $request->product_category_id,
             'description' => $request->description,
             'price' => $request->price,
-            'is_featured' => $request->boolean('is_featured'), // <-- TANGANI INPUT
+            // 'is_featured' => $request->boolean('is_featured'),
             'image_path' => $imagePath,
             'delivery_link_1' => $request->delivery_link_1,
             'delivery_link_3' => $request->delivery_link_3,
@@ -97,9 +97,9 @@ class ProductController extends Controller
              'name' => 'required|string|max:255',
              'product_category_id' => 'required|exists:product_categories,id',
              'description' => 'required|string',
-             'price' => 'required|integer|min:0',
-             'is_featured' => 'nullable|boolean',
-             'image' => 'nullable|image', // image nullable saat update
+            //  'price' => 'required|integer|min:0',
+            //  'is_featured' => 'nullable|boolean',
+             'image' => 'nullable|image',
              'delivery_link_1' => 'nullable|url',
              'delivery_link_3' => 'nullable|url',
              'delivery_link_2' => 'nullable|url',
@@ -115,9 +115,9 @@ class ProductController extends Controller
 
         $product->update([
             'name' => $request->name,
-            'price' => $request->price,
+            // 'price' => $request->price,
             'product_category_id' => $request->product_category_id,
-            'is_featured' => $request->boolean('is_featured'), // <-- TANGANI INPUT
+            // 'is_featured' => $request->boolean('is_featured'), 
             'image_path' => $imagePath,
             'description' => $request->description,
             'delivery_link_1' => $request->delivery_link_1,

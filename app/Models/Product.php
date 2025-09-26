@@ -18,7 +18,7 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'is_featured', // <-- TAMBAHKAN INI
+        'is_featured', 
         'image_path',
         'delivery_link_1',
         'delivery_link_2',
