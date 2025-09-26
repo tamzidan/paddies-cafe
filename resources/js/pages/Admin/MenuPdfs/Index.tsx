@@ -52,7 +52,7 @@ export default function MenuPdfIndex() {
                         <tr>
                             <th className="p-4">Judul</th>
                             <th className="p-4">Status</th>
-                            <th className="p-4">File</th>
+                            {/* <th className="p-4">File</th> */}
                             <th className="p-4">Aksi</th>
                         </tr>
                     </thead>
@@ -71,11 +71,11 @@ export default function MenuPdfIndex() {
                                         </span>
                                     )}
                                 </td>
-                                <td className="p-4">
+                                {/* <td className="p-4">
                                     <a href={menu.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                                         Lihat PDF
                                     </a>
-                                </td>
+                                </td> */}
                                 <td className="p-4">
                                     <div className="flex gap-2">
                                         {!menu.is_active && (
