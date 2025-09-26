@@ -126,4 +126,21 @@ class PageController extends Controller
     {
         return Inertia::render('Reservasi');
     }
+
+    /**
+     * Menampilkan halaman Kebijakan Privasi.
+     */
+    public function privacyPolicy()
+    {
+        return Inertia::render('PrivacyPolicy');
+    }
+
+    /**
+     * Menampilkan halaman Syarat & Ketentuan.
+     */
+    public function termsConditions()
+    {
+        return Inertia::render('TermsConditions');
+    }
+
 }

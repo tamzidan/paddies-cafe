@@ -276,9 +276,9 @@ z"/>
                             <span>© {currentYear} Paddies Cafe. All Rights Reserved.</span>
                         </div>
                         <div className="flex items-center space-x-6 text-gray-400 text-sm">
-                            <a href="#" className="hover:text-white transition-colors duration-300 hover:underline">Kebijakan Privasi</a>
+                            <a href={route('privacy.policy')} className="hover:text-white transition-colors duration-300 hover:underline">Kebijakan Privasi</a>
                             <span className="text-gray-600">•</span>
-                            <a href="#" className="hover:text-white transition-colors duration-300 hover:underline">Syarat & Ketentuan</a>
+                            <a href={route('terms.conditions')} className="hover:text-white transition-colors duration-300 hover:underline">Syarat & Ketentuan</a>
                         </div>
                         <div className="flex items-center space-x-2 text-gray-400 text-sm">
                             <span>Made with</span>
@@ -1116,9 +1116,13 @@ const renderReservasi = () => {
                                     <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full mr-4 group-hover:from-purple-600 group-hover:to-pink-600 transition-all"><Instagram className="h-6 w-6" /></div>
                                     <div><div className="font-bold text-black">Instagram</div><div className="text-gray-600">{reservationSettings.reservasi_ig_username}</div><div className="text-sm text-pink-600 font-medium">Update menu & promo terbaru</div></div>
                                 </a>
-                                <a href={reservationSettings.reservasi_tiktok_link} target="_blank" rel="noopener noreferrer" className="flex items-center p-4 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-lg transition-all duration-300 group">
-                                    <div className="bg-blue-600 text-white p-3 rounded-full mr-4 group-hover:bg-blue-700 transition-colors"><Facebook className="h-6 w-6" /></div>
-                                    <div><div className="font-bold text-black">Facebook</div><div className="text-gray-600">{reservationSettings.reservasi_tiktok_name}</div><div className="text-sm text-blue-600 font-medium">Event & komunitas</div></div>
+                                <a href={reservationSettings.reservasi_tiktok_link} target="_blank" rel="noopener noreferrer" className="flex items-center p-4 bg-violet-50 hover:bg-violet-100 border border-violet-200 rounded-lg transition-all duration-300 group">
+                                    <div className="bg-violet-600 text-white p-3 rounded-full mr-4 group-hover:bg-violet-700 transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                                        </svg>
+                                    </div>
+                                    <div><div className="font-bold text-black">Tiktok</div><div className="text-gray-600">{reservationSettings.reservasi_tiktok_name}</div><div className="text-sm text-violet-600 font-medium">Vibes & konten seru kami di TikTok</div></div>
                                 </a>
                                 <div className="bg-black text-white p-6 rounded-lg">
                                     <h5 className="font-bold text-lg mb-3">Tips Reservasi</h5>

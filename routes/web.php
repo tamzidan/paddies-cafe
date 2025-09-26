@@ -13,14 +13,16 @@ use App\Http\Controllers\PageController;
 // Route::get('/', [PageController::class, 'home'])->name('home');
 
 // Nanti kita akan tambahkan route lain di sini
-Route::get('/menu', [PageController::class, 'menu'])->name('menu');
-Route::get('/shop', [PageController::class, 'shop'])->name('shop');
-Route::get('/location', [PageController::class, 'location'])->name('location');
-Route::get('/reservasi', [PageController::class, 'reservasi'])->name('reservasi');
+// Route::get('/menu', [PageController::class, 'menu'])->name('menu');
+// Route::get('/shop', [PageController::class, 'shop'])->name('shop');
+// Route::get('/location', [PageController::class, 'location'])->name('location');
+// Route::get('/reservasi', [PageController::class, 'reservasi'])->name('reservasi');
 
 Route::get('/', [PageController::class, 'singlePage'])->name('home');
-
-
+// --- TAMBAHKAN KODE DI BAWAH INI ---
+Route::get('/kebijakan-privasi', [PageController::class, 'privacyPolicy'])->name('privacy.policy');
+Route::get('/syarat-ketentuan', [PageController::class, 'termsConditions'])->name('terms.conditions');
+// ------------------------------------
 
 // GRUP ROUTE UNTUK ADMIN
 Route::prefix('admin')
@@ -52,12 +54,9 @@ Route::prefix('admin')
         Route::get('reservation-settings', [\App\Http\Controllers\Admin\ReservationSettingController::class, 'index'])->name('reservation-settings.index');
         Route::put('reservation-settings', [\App\Http\Controllers\Admin\ReservationSettingController::class, 'update'])->name('reservation-settings.update');
 
-        // --- TAMBAHKAN ROUTE BARU DI SINI ---
         Route::get('operational-hours', [\App\Http\Controllers\Admin\OperationalHourController::class, 'index'])->name('operational-hours.index');
         Route::get('operational-hours/{operational_hour}/edit', [\App\Http\Controllers\Admin\OperationalHourController::class, 'edit'])->name('operational-hours.edit');
         Route::put('operational-hours/{operational_hour}', [\App\Http\Controllers\Admin\OperationalHourController::class, 'update'])->name('operational-hours.update');
-        // Route::put('operational-hours/{operational_hour}/toggle-open', [\App\Http\Controllers\Admin\OperationalHourController::class, 'toggleOpen'])->name('operational-hours.toggleOpen');
-        // ------------------------------------
 
 });
 

@@ -13,8 +13,8 @@ interface ReservationSettings {
     reservasi_email?: string;
     reservasi_ig_username?: string;
     reservasi_ig_link?: string;
-    reservasi_fb_name?: string;
-    reservasi_fb_link?: string;
+    reservasi_tiktok_name?: string;
+    reservasi_tiktok_link?: string;
     reservasi_tips?: string;
 }
 
@@ -36,8 +36,8 @@ export default function ReservationSettingsIndex({ settings }: Props) {
         reservasi_email: settings.reservasi_email || 'info@paddiescafe.com',
         reservasi_ig_username: settings.reservasi_ig_username || '@paddiescafe',
         reservasi_ig_link: settings.reservasi_ig_link || 'https://instagram.com/paddiescafe',
-        reservasi_fb_name: settings.reservasi_fb_name || 'Paddies Cafe Official',
-        reservasi_fb_link: settings.reservasi_fb_link || '#',
+        reservasi_tiktok_name: settings.reservasi_tiktok_name || 'Paddies Cafe Official',
+        reservasi_tiktok_link: settings.reservasi_tiktok_link || '#',
         reservasi_tips: settings.reservasi_tips || '• Reservasi minimal 2 jam sebelumnya\n• Untuk grup 8+ orang, harap konfirmasi 1 hari sebelum\n• Reservasi weekend disarankan H-2\n• Deposit diperlukan untuk acara khusus\n• Maksimal holding time: 15 menit',
     });
 
@@ -57,7 +57,7 @@ export default function ReservationSettingsIndex({ settings }: Props) {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         
                         {/* Judul & Subtitel */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label className="block text-sm font-medium mb-1">Judul Halaman</label>
                                 <input type="text" value={data.reservasi_title} onChange={e => setData('reservasi_title', e.target.value)} className="w-full bg-input border-border rounded-md p-2" />
@@ -68,7 +68,7 @@ export default function ReservationSettingsIndex({ settings }: Props) {
                                 <input type="text" value={data.reservasi_subtitle} onChange={e => setData('reservasi_subtitle', e.target.value)} className="w-full bg-input border-border rounded-md p-2" />
                                 {errors.reservasi_subtitle && <div className="text-red-500 text-sm mt-1">{errors.reservasi_subtitle}</div>}
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* Kontak */}
                         <fieldset className="border p-4 rounded-md">
@@ -113,13 +113,13 @@ export default function ReservationSettingsIndex({ settings }: Props) {
                                 </div>
                                  <div>
                                     <label className="block text-sm font-medium mb-1">Username Tiktok</label>
-                                    <input type="text" value={data.reservasi_fb_name} onChange={e => setData('reservasi_fb_name', e.target.value)} className="w-full bg-input border-border rounded-md p-2" />
-                                    {errors.reservasi_fb_name && <div className="text-red-500 text-sm mt-1">{errors.reservasi_fb_name}</div>}
+                                    <input type="text" value={data.reservasi_tiktok_name} onChange={e => setData('reservasi_tiktok_name', e.target.value)} className="w-full bg-input border-border rounded-md p-2" />
+                                    {errors.reservasi_tiktok_name && <div className="text-red-500 text-sm mt-1">{errors.reservasi_tiktok_name}</div>}
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium mb-1">Link Tiktok</label>
-                                    <input type="url" value={data.reservasi_fb_link} onChange={e => setData('reservasi_fb_link', e.target.value)} className="w-full bg-input border-border rounded-md p-2" />
-                                    {errors.reservasi_fb_link && <div className="text-red-500 text-sm mt-1">{errors.reservasi_fb_link}</div>}
+                                    <input type="url" value={data.reservasi_tiktok_link} onChange={e => setData('reservasi_tiktok_link', e.target.value)} className="w-full bg-input border-border rounded-md p-2" />
+                                    {errors.reservasi_tiktok_link && <div className="text-red-500 text-sm mt-1">{errors.reservasi_tiktok_link}</div>}
                                 </div>
                             </div>
                         </fieldset>
