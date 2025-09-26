@@ -541,87 +541,126 @@ const HomeSection = ({ sliders, operationalHours, featuredProducts, testimonials
             </div>
 
 {/* ================================================ */}
-{/* IMPROVED OPERATIONAL HOURS SECTION */}
+{/* ENHANCED OPERATIONAL HOURS SECTION */}
 {/* ================================================ */}
 {operationalHours && operationalHours.length > 0 && (
-    <div className="py-20 bg-black">
-        <div className="container mx-auto px-6">
+    <div className="py-20 bg-black relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-10 left-10 w-32 h-32 border border-white rounded-full"></div>
+            <div className="absolute bottom-10 right-10 w-24 h-24 border border-white rounded-full"></div>
+            <div className="absolute top-1/2 left-1/4 w-16 h-16 border border-white rounded-full"></div>
+        </div>
+        
+        <div className="container mx-auto px-6 relative">
             <div className="text-center mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                <div className="flex items-center justify-center mb-6">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white to-transparent w-20"></div>
+                    <Clock className="h-8 w-8 text-white mx-4" />
+                    <div className="h-px bg-gradient-to-r from-transparent via-white to-transparent w-20"></div>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
                     Jam Operasional
                 </h2>
-                <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Kami siap melayani Anda setiap hari dengan sepenuh hati.
+                <p className="text-gray-300 text-lg max-w-2xl mx-auto leading-relaxed">
+                    Kami siap melayani Anda setiap hari dengan sepenuh hati dan dedikasi tinggi.
                 </p>
             </div>
             
-            {/* Responsive grid with better breakpoints */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
-                {operationalHours.map((item) => {
+            {/* Enhanced grid layout */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 lg:gap-6 xl:grid-cols-2 xl:gap-6 gap-4 max-w-7xl mx-auto">
+                {operationalHours.map((item, index) => {
                     const isToday = item.day.toLowerCase() === todayName.toLowerCase();
+                    const isWeekend = item.day.toLowerCase() === 'sabtu' || item.day.toLowerCase() === 'minggu';
+                    
                     return (
                         <div
                             key={item.id}
                             className={`
-                                relative p-6 rounded-2xl transition-all duration-300 transform 
-                                hover:-translate-y-2 hover:shadow-2xl flex flex-col text-center
-                                min-h-[160px] group cursor-default
+                                relativegroup cursor-default overflow-hidden
+                                transition-all duration-500 transform hover:scale-105
                                 ${isToday 
-                                    ? 'bg-white text-black shadow-xl scale-105 border-2 border-white' 
-                                    : 'bg-gray-900 border border-gray-700 text-white hover:border-gray-600'
+                                    ? 'bg-white text-black shadow-2xl scale-110 z-10' 
+                                    : 'bg-gray-900 text-white border border-gray-800 hover:border-gray-600 hover:bg-gray-800'
                                 }
+                                rounded-xl min-h-[180px] flex flex-col justify-between p-5
+                                hover:shadow-2xl hover:-translate-y-1
                             `}
+                            style={{ 
+                                animationDelay: `${index * 100}ms`,
+                                animation: 'fadeInUp 0.6s ease-out forwards'
+                            }}
                         >
-                            {/* Today indicator */}
+                            {/* Decorative elements */}
+                            <div className={`absolute top-0 left-0 w-full h-1 ${
+                                isToday ? 'bg-black' : isWeekend ? 'bg-gray-600' : 'bg-gray-700'
+                            }`}></div>
+                            
+                            {/* Today indicator with better design */}
                             {isToday && (
-                                <div className="absolute -top-2 -right-2 bg-black text-white text-xs px-3 py-1 rounded-full font-semibold">
-                                    Hari Ini
+                                <div className="absolute -top-3 -right-3 bg-black text-white text-xs px-4 py-1 rounded-full font-bold shadow-lg border-2 border-white">
+                                    <div className="flex items-center">
+                                        <div className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></div>
+                                        HARI INI
+                                    </div>
                                 </div>
                             )}
                             
-                            <h3 className="font-bold text-xl mb-3 tracking-wide">
-                                {item.day}
-                            </h3>
+                            {/* Weekend indicator */}
+                            {!isToday && isWeekend && (
+                                <div className="absolute top-3 right-3 w-3 h-3 bg-gray-600 rounded-full opacity-60"></div>
+                            )}
                             
-                            <p className={`text-lg mb-6 flex-grow font-medium ${
-                                isToday ? 'text-gray-700' : 'text-gray-300'
-                            }`}>
-                                {item.hours}
-                            </p>
-                            
-                            {/* Status indicator with better styling */}
-                            <div className="flex items-center justify-center space-x-2 mt-auto">
-                                <div className={`
-                                    w-3 h-3 rounded-full transition-all duration-300 
-                                    ${item.is_open 
-                                        ? (isToday ? 'bg-black animate-pulse' : 'bg-white') 
-                                        : 'bg-gray-500'
-                                    }
-                                `}></div>
-                                <span className={`
-                                    text-sm font-semibold transition-colors duration-300
-                                    ${item.is_open 
-                                        ? (isToday ? 'text-black' : 'text-white') 
-                                        : 'text-gray-500'
-                                    }
-                                `}>
-                                    {item.is_open ? 'Buka' : 'Tutup'}
-                                </span>
+                            {/* Day name with better typography */}
+                            <div className="text-center mb-4">
+                                <h3 className={`font-black text-lg tracking-wider uppercase ${
+                                    isToday ? 'text-black' : 'text-white group-hover:text-gray-200'
+                                }`}>
+                                    {item.day}
+                                </h3>
+                                <div className={`h-px w-8 mx-auto mt-2 ${
+                                    isToday ? 'bg-black' : 'bg-gray-600 group-hover:bg-gray-500'
+                                }`}></div>
                             </div>
+                            
+                            {/* Hours with enhanced styling */}
+                            <div className="flex-grow flex items-center justify-center">
+                                <div className={`text-center p-3 rounded-lg transition-all duration-300 ${
+                                    isToday 
+                                        ? 'bg-gray-100 border border-gray-300' 
+                                        : 'bg-gray-800 border border-gray-700 group-hover:bg-gray-700'
+                                }`}>
+                                    <p className={`text-sm font-bold leading-relaxed ${
+                                        isToday ? 'text-black' : 'text-white'
+                                    }`}>
+                                        {item.hours}
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            {/* Hover effect overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl pointer-events-none"></div>
                         </div>
                     );
                 })}
             </div>
-            
-            {/* Additional info */}
-            <div className="text-center mt-12">
-                <p className="text-gray-400 text-sm">
-                    * Jam operasional dapat berubah pada hari libur nasional
-                </p>
-            </div>
         </div>
+        
+        {/* Add CSS animation */}
+        <style>{`
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `}</style>
     </div>
-)}            
+)}       
 
 
             <div className="container py-20 mx-auto px-4">

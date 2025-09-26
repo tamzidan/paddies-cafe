@@ -34,9 +34,11 @@ class OperationalHourController extends Controller
      */
     public function update(Request $request, OperationalHour $operational_hour)
     {
+        // Validasi sekarang mencakup 'day' dan menghapus 'is_open'
         $validated = $request->validate([
+            'day'   => 'required|string|max:255',
             'hours' => 'required|string|max:255',
-            'is_open' => 'required|boolean',
+            // 'is_open' => 'required|boolean',
         ]);
 
         $operational_hour->update($validated);

@@ -56,7 +56,7 @@ Route::prefix('admin')
         Route::get('operational-hours', [\App\Http\Controllers\Admin\OperationalHourController::class, 'index'])->name('operational-hours.index');
         Route::get('operational-hours/{operational_hour}/edit', [\App\Http\Controllers\Admin\OperationalHourController::class, 'edit'])->name('operational-hours.edit');
         Route::put('operational-hours/{operational_hour}', [\App\Http\Controllers\Admin\OperationalHourController::class, 'update'])->name('operational-hours.update');
-        Route::put('operational-hours/{operational_hour}/toggle-open', [\App\Http\Controllers\Admin\OperationalHourController::class, 'toggleOpen'])->name('operational-hours.toggleOpen');
+        // Route::put('operational-hours/{operational_hour}/toggle-open', [\App\Http\Controllers\Admin\OperationalHourController::class, 'toggleOpen'])->name('operational-hours.toggleOpen');
         // ------------------------------------
 
 });
