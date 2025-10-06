@@ -12,6 +12,7 @@ export default function ProductCreate({ categories }: { categories: Category[] }
         product_category_id: '',
         description: '',
         price: 0,
+        rating: 4.8,
         is_featured: false as boolean,
         image: null as File | null,
         delivery_link_1: '',
@@ -66,6 +67,19 @@ export default function ProductCreate({ categories }: { categories: Category[] }
                             <input type="number" value={data.price} onChange={e => setData('price', parseInt(e.target.value))} className="w-full bg-input border-border rounded-md p-2" />
                             {errors.price && <div className="text-red-500">{errors.price}</div>}
                         </div> */}
+                        <div>
+                            <label>Rating (0.0 - 5.0)</label>
+                            <input
+                                type="number"
+                                step="0.1"
+                                min="0"
+                                max="5"
+                                value={data.rating}
+                                onChange={e => setData('rating', parseFloat(e.target.value))}
+                                className="w-full bg-input border-border rounded-md p-2"
+                            />
+                            {errors.rating && <div className="text-red-500">{errors.rating}</div>}
+                        </div>
                         <div>
                             <label>Gambar Produk</label>
                             <input type="file" onChange={e => setData('image', e.target.files ? e.target.files[0] : null)} className="w-full bg-input border-border rounded-md p-2" />

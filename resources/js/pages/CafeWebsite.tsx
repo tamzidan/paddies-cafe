@@ -427,6 +427,7 @@ interface Product {
     name: string;
     description: string;
     price: number;
+    rating: number;
     category: ProductCategory;
     is_featured: boolean;
     image_path?: string;
@@ -653,7 +654,7 @@ const HomeSection = ({ sliders, operationalHours, featuredProducts, testimonials
             </div>
 
             {/* --- Statistik Section --- */}
-            <div className="bg-black text-white py-26">
+            {/* <div className="bg-black text-white py-26">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                         {[
@@ -670,7 +671,7 @@ const HomeSection = ({ sliders, operationalHours, featuredProducts, testimonials
                         ))}
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* --- Menu Unggulan Section --- */}
             <div className="container py-20 my-10 mx-auto px-4">
@@ -952,7 +953,7 @@ const CafeWebsite: React.FC<CafeWebsiteProps> = ({
                                             <div className="flex items-center justify-end">
                                                 <div className="flex items-center text-black">
                                                     <Star className="h-4 w-4 fill-current" />
-                                                    <span className="text-sm font-medium ml-1">4.8</span>
+                                                    <span className="text-sm font-medium ml-1">{product.rating}</span>
                                                 </div>
                                             </div>
                                         </div>

@@ -60,7 +60,8 @@ export interface Product {
     delivery_link_1?: string | null;
     delivery_link_2?: string | null;
     delivery_link_3?: string | null;
-    is_featured: boolean; // <-- TAMBAHKAN INI
+    rating: number;
+    is_featured: boolean;
     created_at?: string;
     updated_at?: string;
 }

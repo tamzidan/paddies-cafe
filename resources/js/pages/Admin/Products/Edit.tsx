@@ -21,6 +21,7 @@ export default function ProductEdit({ product, categories }: Props) {
         product_category_id: product.product_category_id || '',
         description: product.description || '',
         price: product.price || '',
+        rating: product.rating || 4.8,
         is_featured: product.is_featured || false, // <-- TAMBAHKAN STATE BARU
         image: null as File | null,
         delivery_link_1: product.delivery_link_1 || '',
@@ -96,6 +97,21 @@ export default function ProductEdit({ product, categories }: Props) {
                             />
                             {errors.price && <div className="text-red-500 text-sm">{errors.price}</div>}
                         </div> */}
+
+                        {/* Rating */}
+                        <div>
+                            <label className="block text-sm font-medium mb-1">Rating (0.0 - 5.0)</label>
+                            <input
+                                type="number"
+                                step="0.1"
+                                min="0"
+                                max="5"
+                                value={data.rating}
+                                onChange={e => setData('rating', parseFloat(e.target.value))}
+                                className="w-full bg-input border border-border rounded-md p-2"
+                            />
+                            {errors.rating && <div className="text-red-500 text-sm">{errors.rating}</div>}
+                        </div>
 
                         {/* Gambar Produk */}
                         <div>
